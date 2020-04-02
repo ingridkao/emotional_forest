@@ -1,0 +1,20 @@
+<template v-for="(option_index, option) in issue.options">
+  <li class="option option--range option--full-width">
+    <p class="range-description" data-text="{{ option.text }}">{{ option.text }}</p>
+    <input
+      id="option-{{issue_index+1}}-{{option_index+1}}"
+      type="range"
+      name="option-{{issue_index+1}}-{{option_index+1}}"
+      step="1"
+      min="{{option.min}}"
+      max="{{option.max}}"
+      value="0"
+      data-score-tag="{{ issue.scoreTag }}"
+      v-bind:class="{ 'reverse': option.reverse }"
+    >
+    <div class="range-indicators">
+      <span style="float: left;">{{ option.left }}</span>
+      <span style="float: right;">{{ option.right }}</span>
+    </div>
+  </li>
+</template>

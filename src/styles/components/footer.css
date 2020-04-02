@@ -1,0 +1,15 @@
+footer {
+  position: absolute * * 0 0;
+  width: 100%;
+  padding: 1em;
+  font-size: .75em;
+  color: #999;
+
+  a {
+    text-decoration: none;
+  }
+
+  @media(--mobile-portrait) {
+    border-top: 1px solid #CECECF;
+  }
+}

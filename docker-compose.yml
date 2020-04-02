@@ -1,0 +1,10 @@
+version: '2'
+services:
+  web:
+    build: .
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+      - /usr/src/app/bower_components
+    ports:
+      - "9000:9000"

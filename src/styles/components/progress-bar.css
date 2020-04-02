@@ -1,0 +1,10 @@
+.progress-bar {
+  position: absolute 0 * * 0;
+  size: 100% 1em;
+  border: none;
+  appearance: none;
+}
+
+.progress-bar::-webkit-progress-bar {
+  background: transparent;
+}

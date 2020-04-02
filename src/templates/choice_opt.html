@@ -1,0 +1,43 @@
+<template v-for="(option_index, option) in issue.options">
+  <li class="option" v-bind:class="{'option--image': issue.picture}">
+    <input
+      hidden
+      id="option-{{issue_index+1}}-{{option_index+1}}"
+      type="{{ issue.variant === 'multiple' ? 'checkbox' : 'radio' }}"
+      name="option-{{issue_index+1}}"
+      value="{{option_index+1}}"
+      v-bind:class="{'js-show-modal': issue.showModal}"
+      data-show-next="{{ option.showNext }}"
+      data-score="{{ option.score || 0 }}"
+      data-score-tag="{{ issue.scoreTag }}"
+      data-show-text="{{ option.showText }}"
+      data-bingo="{{ option.bingo && 1 }}"
+    >
+
+    <label for="option-{{issue_index+1}}-{{option_index+1}}">
+      <span v-if="!option.image" class="indicator">
+        <svg viewBox="0 0 43 43" xmlns="http://www.w3.org/2000/svg">
+          <path d="M37.1 15.8c.8-.8.8-2 0-2.8l-3.4-3.4c-.8-.8-2-.8-2.8 0L18.7 21.8c-.8.8-2 .8-2.8 0l-3.1-3.1c-.8-.8-2-.8-2.8 0l-3.4 3.4c-.8.8-.8 2 0 2.8l9.3 9.3c.8.8 2.1.8 2.8 0l18.4-18.4z" fill="currentColor" fill-rule="evenodd"/>
+        </svg>
+      </span>
+
+      <div v-if="option.image" class="option__image" style="background-image: url({{ option.image }})"></div>
+
+      <div v-if="option.text" class="option__text">
+        <span data-text="{{ option.text }}">{{ option.text }}</span>
+        <span class="extra-field" v-if="option.extraInput.type === 'text'">
+          {{ option.extraInput.prefix }}
+          <input id="option-{{issue_index+1}}-{{option_index+1}}-extra" type="text" name="option-{{issue_index+1}}-extra" />
+        </span>
+        <span class="extra-field" v-if="option.extraInput.type === 'select'">
+          <div class="select-wrap">
+            <select id="option-{{issue_index+1}}-{{option_index+1}}-extra" name="option-{{issue_index+1}}-extra">
+              <option v-for="selectOption in option.extraInput.options" value ="{{selectOption}}">{{selectOption}}</option>
+            </select>
+          </div>
+        </span>
+      </div>
+
+    </label>
+  </li>
+</template>

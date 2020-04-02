@@ -1,0 +1,251 @@
+:root {
+  --base-line-height: 2.5em;
+}
+
+.issue {
+  &-btn {
+    &--left {
+      float: left;
+    }
+    &--right {
+      float: right;
+    }
+  }
+}
+
+.question {
+  max-height: 20vh;
+  padding: 1em;
+  border-radius: var(--border-radius-base);
+  overflow-x: hidden;
+  overflow-y: scroll;
+
+  @media (--mobile-portrait) {
+    max-height: 15vh;
+  }
+
+  &__text {
+    margin: 0;
+    font-weight: var(--font-weight-regular);
+    font-size: 1.125em;
+    text-align: left;
+  }
+  &__image {
+    display: block;
+    max-height: 17vh;
+    margin: 1em auto 0;
+  }
+}
+
+/* options list */
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  size: 100% 60vh;
+  margin: 1.5em auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  @media(--mobile-portrait) {
+    height: 40vh;
+  }
+
+  > * {
+    width: 100%;
+  }
+}
+
+
+/* option item */
+.option {
+  position: relative;
+  width: 50%;
+  padding-bottom: .6em;
+  cursor: pointer;
+
+  &:nth-child(even) {
+    padding-left: .3em;
+  }
+  &:nth-child(odd) {
+    padding-right: .3em;
+  }
+  @media (--mobile-portrait) {
+    width: 100%;
+
+    &:nth-child(even) {
+      padding-left: 0;
+    }
+    &:nth-child(odd) {
+      padding-right: 0;
+    }
+  }
+
+  /* full width option */
+  &--full-width {
+    width: 100%;
+
+    &:nth-child(even) {
+      padding-left: 0;
+    }
+    &:nth-child(odd) {
+      padding-right: 0;
+    }
+  }
+  /* image option */
+  &--image {
+    @media(--mobile-portrait) {
+      width: 50%;
+
+      &:nth-child(even) {
+        padding-left: .3em;
+      }
+      &:nth-child(odd) {
+        padding-right: .3em;
+      }
+    }
+
+    label {
+      position: relative;
+
+      &:before {
+        content: '';
+        display: block;
+        padding-bottom: 60%;
+      }
+    }
+
+    .option__text {
+      position: absolute * * 0 0;
+      width: 100%;
+      padding-left: 1em;
+      text-align: center;
+    }
+  }
+  /* dropdown option */
+  &--dropdown {
+    margin: 1em 0;
+
+    p {
+      margin-bottom: 0;
+    }
+  }
+  /* range option */
+  &--range {
+    margin: 1em 0;
+
+    .range {
+      &-description {
+        margin-bottom: 0;
+      }
+      &-indicators {
+        position: absolute * * 0 0;
+        width: 100%;
+        font-size: .75em;
+        opacity: .7;
+      }
+    }
+  }
+
+
+  input {
+    &:checked {
+      & + label .indicator {
+        svg {
+          display: inline-block;
+        }
+      }
+    }
+  }
+  label {
+    display: block;
+    position: relative;
+    width: 100%;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+    border-radius: var(--border-radius-base);
+  }
+  select {
+    width: 100%;
+    margin: 0;
+    padding: 0 1.5em;
+    font-size: 1em;
+    line-height: var(--base-line-height);
+    border: 1px;
+    border-style: solid;
+    border-color: var(--color-initium-gray-light);
+    border-radius: var(--border-radius-base);
+    background-color: #fff;
+    cursor: pointer;
+    outline: 0;
+    appearance: none;
+  }
+  > span {
+    color: #000;
+  }
+
+  .indicator {
+    position: absolute .6em * * 1em;
+    size: 1.3em;
+    border-radius: 1px;
+    border-width: 1px;
+    border-style: solid;
+    background-color: #fff;
+    box-sizing: content-box;
+
+    svg {
+      display: none;
+      position: absolute 0 * * 0;
+      size: 1.3em;
+    }
+  }
+  .select-wrap {
+    position: relative;
+
+    &:after {
+      content: '';
+      position: absolute 50% .75em * *;
+      size: 0;
+      margin-top: -.18em;
+      pointer-events: none;
+      border-top: .36em solid #000;
+      border-right: .36em solid transparent;
+      border-bottom: .36em solid transparent;
+      border-left: .36em solid transparent;
+    }
+  }
+  .extra-field {
+    input {
+      background-color: transparent;
+      font-size: inherit;
+      color: inherit;
+      border-bottom-width: 1px;
+      border-color: inherit;
+      border-style: solid;
+      border-radius: 0;
+    }
+    .select-wrap {
+      display: inline-block;
+      margin-left: 0.5em;
+
+      select {
+        padding-left: 1em;
+        padding-right: 2em;
+        line-height: 1.7;
+      }
+    }
+  }
+
+  /* option content */
+  &__text {
+    padding: .5em 1em .5em 3em;
+    line-height: 1.5;
+  }
+  &__image {
+    position: absolute 1em * * 1em;
+    size: calc(100% - 2em) calc(100% - var(--base-line-height) - 1em);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}

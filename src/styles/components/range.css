@@ -1,0 +1,102 @@
+:root {
+  --track-bg-image:linear-gradient(to right,
+    #EFA455,
+    #EFA455 10%,
+    #DFAA70 10%,
+    #DFAA70 20%,
+    #D2AE87 20%,
+    #D2AE87 30%,
+    #C5B29C 30%,
+    #C5B29C 40%,
+    #BBB6B0 40%,
+    #BBB6B0 50%,
+    #9BA0A8 50%,
+    #9BA0A8 60%,
+    #828A99 60%,
+    #828A99 70%,
+    #636F87 70%,
+    #636F87 80%,
+    #455677 80%,
+    #455677 90%,
+    #1B3260 90%,
+    #1B3260 100%
+  );
+  --thumb-color: #f4f4f4;
+
+  --thumb-height: 2em;
+  --thumb-width: .5em;
+
+  --track-width: 100%;
+  --track-height: 1.6em;
+}
+
+
+
+input[type=range] {
+  -webkit-appearance: none;
+  margin: calc(var(--thumb-height) / 4) 0;
+  width: var(--track-width);
+  font-size: 1.125em;
+
+  &.reverse {
+    transform: rotate(180deg);
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &::-webkit-slider-runnable-track {
+    size: var(--track-width) var(--track-height);
+    background-image: var(--track-bg-image);
+    cursor: pointer;
+  }
+
+  &::-webkit-slider-thumb {
+    size: var(--thumb-width) var(--thumb-height);
+    margin-top: -.2em;
+    background: var(--thumb-color);
+    -webkit-appearance: none;
+    cursor: pointer;
+  }
+
+  &:focus::-webkit-slider-runnable-track {
+    /* background: lighten(var(--track-color), var(--contrast); */
+  }
+
+  &::-moz-range-track {
+    size: var(--track-width) var(--track-height);
+    cursor: pointer;
+    background-image: var(--track-bg-image);
+  }
+  &::-moz-range-thumb {
+    size: var(--thumb-width) var(--thumb-height);
+    background: var(--thumb-color);
+    cursor: pointer;
+  }
+
+  &::-ms-track {
+    size: var(--track-width) var(--track-height);
+    background: transparent;
+    color: transparent;
+    cursor: pointer;
+  }
+
+  &::-ms-fill-lower {
+    /* background: darken(var(--track-color), var(--contrast); */
+  }
+  &::-ms-fill-upper {
+    background-image: var(--track-bg-image);
+  }
+  &::-ms-thumb {
+    size: var(--thumb-width) var(--thumb-height);
+    background: var(--thumb-color);
+    cursor: pointer;
+  }
+  &:focus::-ms-fill-lower {
+    background-image: var(--track-bg-image);
+  }
+  &:focus::-ms-fill-upper {
+    /* background: lighten(var(--track-color), var(--contrast); */
+  }
+}

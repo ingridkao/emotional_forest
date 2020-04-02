@@ -1,0 +1,25 @@
+<div class="section" data-anchor="{{ type }}">
+  <a href="https://theinitium.com/" class="logo"></a>
+  <div class="content-wrap">
+    <div class="intro content">
+
+      <section class="intro__title">
+        <h1>{{{ title }}}</h1>
+      </section>
+
+      <section class="intro__content">
+        <div class="intro__description">
+          {{{ description }}}
+        </div>
+
+        <div class="intro__btn">
+          <button class="js-start-button" type="button">
+            <span v-if="type === 'intro'">進入小測試 &#x3E;&#x3E;&#x3E;</span>
+            <span v-else>繼續</span>
+          </button>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>

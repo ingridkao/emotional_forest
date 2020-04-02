@@ -1,0 +1,53 @@
+{
+  "name": "form-template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "private": true,
+  "dependencies": {
+    "qrcode-js": "0.0.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.9.1",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.8.0",
+    "babel-plugin-transform-remove-console": "^6.8.0",
+    "babel-preset-es2015-rollup": "^3.0.0",
+    "bower": "^1.7.9",
+    "browser-sync": "^2.13.0",
+    "css-mqpacker": "^5.0.1",
+    "cssnano": "^3.7.4",
+    "del": "^2.2.2",
+    "fs-extra": "^0.30.0",
+    "fullpage.js": "2.8.4",
+    "gulp": "^3.9.1",
+    "gulp-gh-pages": "^0.5.4",
+    "gulp-htmlmin": "^3.0.0",
+    "gulp-if": "^2.0.1",
+    "gulp-postcss": "^6.1.1",
+    "gulp-replace": "^0.5.4",
+    "gulp-rsync": "0.0.6",
+    "gulp-uglify": "^2.0.0",
+    "gulp-useref": "^3.1.0",
+    "jquery": "^3.0.0",
+    "loaders.css": "^0.1.2",
+    "object.assign": "^4.0.3",
+    "postcss-cssnext": "^2.6.0",
+    "postcss-import": "^8.1.2",
+    "postcss-nested": "^1.0.0",
+    "postcss-short": "^1.4.0",
+    "rollup": "^0.34.10",
+    "rollup-plugin-babel": "^2.5.1",
+    "rollup-plugin-commonjs": "^3.0.0",
+    "rollup-plugin-node-builtins": "^1.0.4",
+    "rollup-plugin-node-resolve": "^2.0.0",
+    "rollup-plugin-replace": "^1.1.0",
+    "rollup-plugin-string": "^2.0.2",
+    "rollup-plugin-uglify": "^1.0.1",
+    "vue": "^1.0.24"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Zhikai Yin",
+  "license": "ISC"
+}

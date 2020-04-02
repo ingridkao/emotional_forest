@@ -1,0 +1,10 @@
+<template v-for="(option_index, option) in issue.options">
+  <li class="option options--text option--full-width option--dropdown">
+    <p v-if="option.text" data-text="{{ option.text }}">{{option.text}}</p>
+    <div class="select-wrap">
+      <select id="option-{{issue_index+1}}-{{option_index+1}}" name="option-{{issue_index+1}}-{{option_index+1}}">
+        <option v-for="item in option.items" value ="{{item}}">{{item}}</option>
+      </select>
+    </div>
+  </li>
+</template>

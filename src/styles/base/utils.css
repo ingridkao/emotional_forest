@@ -1,0 +1,119 @@
+.hidden, [hidden] {
+  display: none;
+}
+
+.content-wrap {
+  position: absolute 0 * * 0;
+  size: 100%;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  size: 70% 80vh;
+  max-width: 40em;
+  margin: 10vh auto;
+  overflow: scroll;
+
+  @media(--mobile-portrait) {
+    size: 100% 60vh;
+    padding: 0 1em;
+    margin: 20vh auto;
+  }
+  @media(--tablet) {
+    width: 80%;
+  }
+}
+
+.logo {
+  position: absolute 2em *  * 1em;
+  size: 3vw;
+  background-image: url("../images/initium-logo.png");
+  background-repeat: no-repeat;
+  background-size: 3vw;
+  z-index: 12;
+
+  @media(--phone) {
+    size: 10vw;
+    background-size: 10vw;
+  }
+  @media(--tablet) {
+    size: 7vw;
+    background-size: 7vw;
+  }
+}
+
+.banner-wrapper {
+  max-width: 728px;
+  position: relative;
+  margin: 0 auto;
+}
+
+button.close-banner {
+  position: absolute;
+  top: 1.25em;
+  right: 15px;
+  cursor: pointer;
+  color: rgb(179, 179, 179);
+  background-color: transparent;
+  margin: 0px;
+  padding: 0px;
+  border-width: 0px;
+  border-style: initial;
+  border-color: initial;
+  border-image: initial;
+  outline: 0px;
+  z-index: 14;
+
+  @media(min-width: 700px) {
+      width: 100%;
+  }
+}
+
+.icon-credit {
+  position: absolute;
+  bottom: 3px;
+  font-size: 10px;
+  color: #9F9F9F;
+  right: 13px;
+
+  @media(--phone-portrait) {
+      display: none;
+  }
+}
+
+#mask {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  background-color: #000000;
+  opacity: 0.8;
+  display: none;
+}
+
+#weixin_tips {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1001;
+  opacity: 0.9;
+  display: none;
+
+  img {
+    width: 2em;
+    float: right;
+  }
+  p {
+    text-align: center;
+    font-size: 1.4em;
+    line-height: 1.9em;
+    color: white;
+    margin: 3em auto auto auto;
+  }
+}

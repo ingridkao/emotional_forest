@@ -1,0 +1,5 @@
+.nav-btn {
+  padding: 0 1em;
+  line-height: var(--base-line-height);
+  border-radius: var(--border-radius-base);
+}

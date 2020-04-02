@@ -1,0 +1,17 @@
+@import "helpers/variables";
+
+@import "vendors/reset_v2";
+
+@import "base/reset";
+@import "base/utils";
+
+@import "pages/intro";
+@import "pages/issue";
+@import "pages/result";
+
+@import "components/loader";
+@import "components/progress-bar";
+@import "components/range";
+@import "components/modal";
+@import "components/nav-btn";
+@import "components/footer";

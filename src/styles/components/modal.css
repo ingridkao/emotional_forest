@@ -1,0 +1,51 @@
+.modal-mask {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed 0 * * 0;
+  size: 100%;
+  background-color: rgba(0, 0, 0, .7);
+  z-index: 9998;
+  transition: opacity .3s ease;
+}
+
+.modal-container {
+  width: 300px;
+  max-height: 70vh;
+  padding: 1em;
+  text-decoration: none;
+  border-radius: var(--border-radius-base);
+  transition: all .3s ease;
+  overflow: scroll;
+}
+
+.modal-icon {
+  text-align: center;
+  margin-bottom: 1em;
+
+  svg {
+    width: 60%;
+  }
+}
+
+.modal-body {
+  text-align: center;
+}
+
+/*
+ * the following styles are auto-applied to elements with
+ * v-transition="modal" when their visiblity is toggled
+ * by Vue.js.
+ *
+ * You can easily play with the modal transition by editing
+ * these styles.
+ */
+
+.modal-enter, .modal-leave {
+  opacity: 0;
+}
+
+.modal-enter .modal-container,
+.modal-leave .modal-container {
+  transform: scale(1.1);
+}

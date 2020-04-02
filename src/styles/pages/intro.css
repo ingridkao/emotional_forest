@@ -1,0 +1,46 @@
+.intro {
+  justify-content: flex-start;
+
+  @media (--mobile-portrait) {
+    justify-content: space-between;
+    height: 100%;
+    margin: 0 auto;
+    padding: 15vh 0 0 0;
+  }
+
+  &__title {
+    @media (--mobile-portrait) {
+      padding: 0 15vw;
+
+      h1 {
+        font-size: 1.5em;
+      }
+    }
+  }
+  &__content {
+    padding: 1.5em;
+  }
+  &__description {
+    max-height: 37vh;
+    padding: 0 1em;
+    overflow-y: scroll;
+
+    @media (--mobile-portrait) {
+      max-height: 20vh;
+      font-size: .875em;
+    }
+  }
+  &__btn {
+    margin-top: 1em;
+    padding-top: 1.5em;
+    border-top: 1px;
+    border-style: solid;
+    text-align: center;
+
+    button {
+      width: 100%;
+      font-size: 1.125em;
+      font-weight: bold;
+    }
+  }
+}

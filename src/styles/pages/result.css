@@ -1,0 +1,64 @@
+.result {
+  padding: 1em;
+  border-radius: var(--border-radius-base);
+  text-align: center;
+
+  @media (--mobile-portrait) {
+    width: calc(100% - 2em);
+    padding: 1em;
+    margin-left: 1em;
+    margin-right: 1em;
+  }
+}
+
+.result-btns {
+  margin: 1em 0;
+}
+
+.result-share {
+  button {
+    position: relative;
+
+    svg {
+      size: 2em;
+    }
+    #wechatqr {
+      position: absolute * * 3em -5em;
+      size: 10em;
+    }
+  }
+}
+
+.result-more {
+  display: flex;
+  flex-wrap: wrap;
+
+  > a {
+    position: relative;
+    size: calc(50% - .5em) 100%;
+    margin-top: .5em;
+    margin-bottom: .5em;
+    border-radius: var(--border-radius-base);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    &:before {
+      content: '';
+      display: block;
+      padding-bottom: 60%;
+    }
+    &:nth-child(even) {
+      margin-left: .5em;
+    }
+    &:nth-child(odd) {
+      margin-right: .5em;
+    }
+  }
+}
+
+.highlight-number {
+  display: block;
+  font-size: 3em;
+  font-weight: bold;
+}
