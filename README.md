@@ -55,6 +55,12 @@ gulp serve
 And go to <localhost:9000> to view the live version.
 
 
-git repositories 20200402 ingridkao
+New git repositories 20200402 ingridkao
 ---------------------------
 # emotional_forest
+
+Precautions
+---------------------------
+There will be errors when running gulp
+    --(Requiring external module babel-register)
+Need to downgrade node version to 10.15.3.
