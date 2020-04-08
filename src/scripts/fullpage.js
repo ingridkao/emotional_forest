@@ -45,7 +45,7 @@ export default function initFullpage() {
         delete url_obj.hash
         const targetUrl = url.format(url_obj)
         $.get(`http://wechat-sign.initiumlab.com/sign?url=${location.href}`).then((response) => {
-          console.log('sing resp:', response)
+          //console.log('sing resp:', response)
           wx.config({
             appId: 'wx20838cd205067e15', // 必填，公众号的唯一标识
             timestamp: response.timestamp, // 必填，生成签名的时间戳
@@ -77,7 +77,9 @@ export default function initFullpage() {
           })
         })
 
-        $('#result').html(results.resultText)
+        $('#result').html(results.resultText);
+        $('#resultTop3').html(results.resultTopList);
+
         if (!$('#banner').children().length) {
           new InitiumGPT({
             network_code: '108061385',

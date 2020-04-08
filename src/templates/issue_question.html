@@ -1,4 +1,4 @@
 <div class="question">
   <h2 class="question__text">{{ issue.question }}</h2>
-  <img v-if="issue.image" class="question__image" src="{{ issue.image }}" alt="issue.question" />
+  <img v-if="issue.image" class="question__image" :src="{{ issue.image ? issue.image: '' }}" alt="issue.question" />
 </div>

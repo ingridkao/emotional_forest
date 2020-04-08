@@ -1,13 +1,12 @@
 <div class="section" data-anchor="{{ type }}">
   <a href="https://theinitium.com/" class="logo"></a>
   <div class="content-wrap">
-    <div class="intro content">
-
-      <section class="intro__title">
-        <h1>{{{ title }}}</h1>
-      </section>
+    <div class="intro content" 
+        v-bind:class="{'first': type === 'intro'}"
+    >
 
       <section class="intro__content">
+        <h1 class="intro__title">{{{ title }}}</h1>
         <div class="intro__description">
           {{{ description }}}
         </div>

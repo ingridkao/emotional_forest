@@ -112,6 +112,7 @@ gulp.task('html', ['bundle', 'styles'], () => {
     .pipe(gulpif('*.html', htmlReplace('Headline_Text_Color', questions.styles['Headline Text Color'])))
     .pipe(gulpif('*.html', htmlReplace('Background_Color', questions.styles['Background Color'])))
     .pipe(gulpif('*.html', htmlReplace('Background_Image', questions.styles['Background Image'])))
+    .pipe(gulpif('*.html', htmlReplace('Blue_Bg_Image', questions.styles['Blue Bg Image'])))
     .pipe(gulpif('*.html', htmlReplace('Background_Mobile_Image', questions.styles['Background Mobile Image'])))
     // Minify
     .pipe(gulpif('*.html', htmlmin({collapseWhitespace: true, removeComments: true})))

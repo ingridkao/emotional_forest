@@ -56,10 +56,14 @@ export function buttonsInit() {
     const targetUrl = encodeURIComponent(url.format(url_obj))
 
     if (platform === 'facebook') {
-      let shareUrl = 'https://www.facebook.com/sharer.php?' +
-        'u=' + targetUrl +
-        '&description=' + shareText
-      window.open(shareUrl)
+      FB.ui({
+        display: 'popup',
+        method: 'share',
+        hashtag: '端傳媒',
+        href: 'https://theinitium.com/project/20180723-quiz-hongkong-literature/',
+      }, function(response){
+        console.log('facebook');
+      });
     } else if (platform === 'twitter') {
       let shareUrl = 'https://twitter.com/intent/tweet?url=' + targetUrl
       window.open(shareUrl)
@@ -156,9 +160,9 @@ export function uploadData() {
   $.get(urlUUID).then(function (response) {
     let uuid = null
     uuid = response.data.uuid
-    console.log(uuid)
+    //console.log(uuid)
     if (uuid) {
-      console.log('Got uuid', uuid)
+      //console.log('Got uuid', uuid)
       $.ajax(
         {
           url: urlRemember + eventname + '/',
@@ -173,13 +177,13 @@ export function uploadData() {
             raw: ''
           }),
           success: function(response){
-            console.log(response)
+            //console.log(response)
           }
         }
       )
     }
   }, function(response){
-    console.log('Error:' + response)
+    //console.log('Error:' + response)
   })
 }
 

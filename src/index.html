@@ -4,14 +4,21 @@
     <meta charset="utf-8" />
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
-    <!--<meta property="og:url" content="" />-->
+    <meta property="og:url" content="https://theinitium.com/project/20180723-quiz-hongkong-literature/" />
     <meta property="og:type" content="article" />
-    <meta property="og:title" content="测试问卷模版" />
-    <meta property="og:description" content="" />
-    <meta property="og:image" content="SHAREIMAGE" />
-    <meta property="og:image:width" content="600" />
-    <meta property="og:image:height" content="400" />
-    <title>测试问卷模版</title>
+    <meta property="og:title" content="情緒森林" />
+    <meta property="og:description" content="測測你是哪隻受傷的小動物" />
+    <meta property="og:image" content="images/bg.jpg" />
+    <meta property="og:image" content="images/result/0.png" />
+    <meta property="og:image" content="images/result/1.png" />
+    <meta property="og:image" content="images/result/2.png" />
+    <meta property="og:image" content="images/result/3.png" />
+    <meta property="og:image" content="images/result/4.png" />
+    <meta property="og:image" content="images/result/5.png" />
+    <meta property="og:image" content="images/result/6.png" />
+    <meta property="og:image" content="images/result/7.png" />
+    <meta property="og:image" content="images/result/8.png" />
+    <title>情緒森林</title>
 
     <!--<link rel="apple-touch-icon" href="apple-touch-icon.png">-->
     <!-- Place favicon.ico in the root directory -->
@@ -28,7 +35,8 @@
         background-color: Background_Color;
         background-image: url(Background_Image);
         background-size: cover;
-        background-position: center;
+        background-position-x: center;
+        background-position-y: top;
         background-repeat: no-repeat;
       }
 
@@ -48,33 +56,54 @@
         background-color: Dark_Color;
       }
       .question,
-      .option label,
-      .result,
-      .nav-btn,
-      a.modal-container {
-        color: Dark_Text_Color;
+      a.modal-container,
+      .nav-btn {
+        color: Light_Text_Color;
         background-color: Light_Color;
+      }
+      .js-show-next,
+      .js-show-result,
+      .js-send{
+        background-color: #f44028;
+        color: #fbbf29;
+        border: 1px solid #fff;
+      }
+      .option label{
+        background-color: #074168;
+        color: Light_text_Color;
       }
       .option .indicator {
         color: Dark_Color;
         border-color: Dark_Color;
       }
-      .option input:checked + label,
-      .intro__content,
-      .result .nav-btn {
+      
+      .option input:checked + label{
         color: Light_Text_Color;
         background-color: Dark_Color;
       }
+
+      .result,
+      .intro__content,
+      .issue.content{
+        color: Light_Text_Color;
+        background-image: url(Blue_Bg_Image);
+        background-repeat: repeat;
+        background-size: 25em;
+        background-color: Dark_Color;
+        border: 5px solid #010817;
+      }
+
       .intro__btn {
         border-color: Light_Text_Color;
       }
       .intro__title {
-        color: Headline_Text_Color;
       }
       .result-share,
-      .modal-icon,
-      .highlight-number {
+      .modal-icon{
         color: Dark_Color;
+      }
+      .issue.content{
+        padding: 0.5em;
       }
     </style>
   </head>
@@ -98,11 +127,11 @@
           class="slide"
           style="position: relative;"
           v-for="(issue_index, issue) in issues"
-          v-styles="{styles: issue.styles, type: 'issue'}"
           data-anchor="{{ issue_index+1 }}"
         >
           <a href="https://theinitium.com/" class="logo"></a>
-          <div v-bind:style="{ display: issue.hidden ? 'none' : 'block' }" data-hidden="{{ issue.hidden }}">
+          <div v-show="issue.hidden" data-hidden="{{ issue.hidden }}">
+            progress
             <progress class="progress-bar" value="{{ issue.progress }}" max="100"></progress>
           </div>
 
@@ -142,7 +171,7 @@
           </div>
 
           <footer>
-            <a href="https://theinitium.com/" target="_blank" style="float: left;">© 2017 Initium Media</a>
+            <a href="https://theinitium.com/" target="_blank" style="float: left;">© 2020 Initium Media</a>
             <a href="https://theinitium.com/misc/privacy/" target="_blank" style="float: right;">隱私政策</a>
           </footer>
         </div>

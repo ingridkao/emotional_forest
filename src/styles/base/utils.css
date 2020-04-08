@@ -28,10 +28,10 @@
 
 .logo {
   position: absolute 2em *  * 1em;
-  size: 3vw;
+  size: 3em;
   background-image: url("../images/initium-logo.png");
   background-repeat: no-repeat;
-  background-size: 3vw;
+  background-size: 3em;
   z-index: 12;
 
   @media(--phone) {

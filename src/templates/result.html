@@ -2,10 +2,19 @@
   <a href="https://theinitium.com/" class="logo"></a>
   <div class="content-wrap">
     <div class="result content">
-      <section class="result-content" id="result">
+      <section class="result-content" id="result"></section>
+
+      <section class="result-email">
+        <input id="email" type="email" placeholder="輸入mail參加後續雲療癒活動"/>
+        <button class="nav-btn js-send">送出</button>
       </section>
 
+      <section class="result-content" id="resultTop3"></section>
+
       <section class="result-btns">
+        <div class="result-again">
+          <button class="nav-btn js-again-button">再答一次</button>
+        </div>
         <div class="result-share">
           <button data-platform='facebook' class='js-share-btn'>
             <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
@@ -29,17 +38,16 @@
             </svg>
           </button>
         </div>
-        <button class="nav-btn js-again-button">再答一次</button>
       </section>
 
-      <section v-if="moreQuizzes" class="result-more">
+      <!--<section v-if="moreQuizzes" class="result-more">
         <a v-for="(index, quiz) in moreQuizzes" href="{{quiz.link}}" style="background-image: url({{ quiz.image }})"></a>
-      </section>
+      </section>-->
     </div>
   </div>
 
   <footer>
-    <a href="https://theinitium.com/" target="_blank" style="float: left;">© 2017 Initium Media</a>
+    <a href="https://theinitium.com/" target="_blank" style="float: left;">© 2020 Initium Media</a>
     <a href="https://theinitium.com/misc/privacy/" target="_blank" style="float: right;">隱私政策</a>
   </footer>
   <!-- <div id="banner" style="text-align: center; top: 1.25em; position: absolute; width: 100%;"></div>
