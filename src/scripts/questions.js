@@ -20,8 +20,8 @@ const questions = {
     'Blue Bg Image': 'images/blue_bg.png',// 雜點圖片路徑
     'Background Mobile Image': 'images/bg_mobile.jpg',// 背景圖片路徑（移動端）
   },
-  sharePreview: 'https://theinitium.com/project/2016-taiwanese-in-mainland-quiz/images/bg.jpg', // 分享到 FB 中的圖片
-  wechatSharePreview: 'https://theinitium.com/project/2016-taiwanese-in-mainland-quiz/images/sharepic-02.jpg', // 分享到 FB 中的圖片
+  sharePreview: 'https://theinitium.com/project/20200411-quiz-emotionforest/images/sharepic-01.jpg', // 分享到 FB 中的圖片
+  wechatSharePreview: 'https://theinitium.com/project/20200411-quiz-emotionforest/images/sharepic-02.jpg', // 分享到 FB 中的圖片
   issues: [
     {
       question: ' 1 今天又是全球被冠狀病毒疫情籠罩下的一天，而你的一天',

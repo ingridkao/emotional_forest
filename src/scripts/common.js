@@ -60,7 +60,7 @@ export function buttonsInit() {
         display: 'popup',
         method: 'share',
         hashtag: '情緒の森',
-        href: targetUrl,
+        href: 'https://theinitium.com',
       }, function(response){
         console.log('facebook');
       });
