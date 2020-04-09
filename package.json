@@ -5,6 +5,7 @@
   "main": "index.js",
   "private": true,
   "dependencies": {
+    "firebase": "^7.13.2",
     "lodash": "^4.17.15",
     "qrcode-js": "0.0.2"
   },

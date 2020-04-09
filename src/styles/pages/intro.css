@@ -14,14 +14,15 @@
     height: calc(100vh - 4em);
     max-width: 40em;
     @media (--mobile-portrait) {
-        justify-content: flex-start;
+      justify-content: flex-start;
+      width: 95%;
+      margin: 20vh auto 0;
     }
   }
 
   &__title {
     @media (--mobile-portrait) {
-      padding: 0 15vw;
-
+      padding: 0 3vw;
       h1 {
         font-size: 1.5em;
       }
@@ -29,20 +30,24 @@
   }
   &__content {
     padding: 0.5em;
+    @media (--mobile-portrait) {
+      width: 95%;
+      margin: 0 auto;
+    }
   }
   &__description {
     max-height: 37vh;
-    padding: 0 1em;
+    padding: 0.5em 1em;
     overflow-y: scroll;
 
     @media (--mobile-portrait) {
-      max-height: 20vh;
+      max-height: 25vh;
       font-size: .875em;
     }
   }
   &__btn {
     margin-top: 1em;
-    padding-top: 1.5em;
+    padding-top: 1em;
     border-top: 1px;
     border-style: solid;
     text-align: center;

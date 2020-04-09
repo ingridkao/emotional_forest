@@ -3,7 +3,8 @@ import _ from 'lodash'
 
 const questions = {
   slug: 'test', // eg: 20161111-taiwanese_mainland
-  title: `情緒の森：測測你是哪隻受傷的小動物`,
+  title: `情緒の森`,
+  subtitle: `測測你是哪隻受傷的小動物`,
   intro: `
 <p>Hey， 你，被來去無蹤的傳染病毒困在家裏的你，最近還好嗎？</p>
 <p>能做的太少，時間卻空出很多；需要擁抱，卻不得不社交隔離。這大概是最容易被壞情緒偷襲的時刻。焦慮、抑鬱甚至絕望，我們被困在一片迷霧遍佈的情緒森林。就讓作為病友的我們為你把脈，看看你是哪隻受傷的小動物，然後，和你分享編輯記者們親測有效的小小貼士。</p>`,
@@ -333,7 +334,9 @@ const questions = {
     }
 
     const resultText = `
-      <img src="images/result/${maxIndex}.png" alt="${scoreTitle[maxIndex]}">
+      <div class="resultImg">
+        <img src="images/result/${maxIndex}.png" alt="${scoreTitle[maxIndex]}">
+      </div>
       <div id="answer" data-index="${maxIndex}" class="resultDesc">
       ${scoreDesc}
       </div>
@@ -345,12 +348,15 @@ const questions = {
         scoreList += `<li>${scoreTitle[index]} : ${(scoreArray[index]/11*100).toFixed(1)}%</li>`;
       }
     }
-    const resultTopList = `
-      <p>其他隱含的小動物們：</p>
-      <ul>
-        ${scoreList}
-      </ul>
-    `;
+    let resultTopList = '';
+    if(scoreList != ''){
+      resultTopList = `
+        <p>其他隱含的小動物們：</p>
+        <ul>
+          ${scoreList}
+        </ul>
+      `;
+    }
 
     // 分享标题:shareText
     return {resultText, shareText, resultTopList}

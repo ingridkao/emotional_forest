@@ -11,6 +11,5 @@ footer {
   }
 
   @media(--mobile-portrait) {
-    border-top: 1px solid #CECECF;
   }
 }

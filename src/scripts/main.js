@@ -1,6 +1,10 @@
 import $ from 'jquery'
 import xdomain from 'xdomain'
 import Vue from 'vue'
+
+import { firebase } from '@firebase/app';
+import '@firebase/firestore'
+
 import assign from 'object.assign'
 import fullpageInit from './fullpage'
 import questions from './questions'
@@ -23,6 +27,7 @@ $(document).ready(() => {
     data: {
       eventname: questions.slug,
       title : questions.title,
+      subtitle : questions.subtitle,
       intro : questions.intro,
       privacy : questions.privacy,
       issues: questions.issues,
@@ -35,7 +40,7 @@ $(document).ready(() => {
     components: {
       'intro': {
         template: introTpl,
-        props: ['type', 'title', 'description']
+        props: ['type', 'title', 'subtitle', 'description']
       },
       'result': {
         template: resultTpl,
@@ -98,6 +103,7 @@ $(document).ready(() => {
     }
   })
 
+  //Facebook
   $.ajaxSetup({ cache: true });
   $.getScript('https://connect.facebook.net/en_US/sdk.js', function(){
     FB.init({
@@ -105,4 +111,42 @@ $(document).ready(() => {
       version: 'v2.9'
     });
   });
+
+  //Firebase
+  const firebaseConfig = {
+    apiKey: "AIzaSyDxpAVzIjYxoGsJZG-F0vO-Dx2aJdSKMgk",
+    authDomain: "initium-3e99c.firebaseapp.com",
+    databaseURL: "https://initium-3e99c.firebaseio.com",
+    projectId: "initium-3e99c",
+    storageBucket: "initium-3e99c.appspot.com",
+    messagingSenderId: "561143347672",
+    appId: "1:561143347672:web:b04d9714e8417b2dfe9aad",
+    measurementId: "G-EDTMBM9XFK"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  //firebase.analytics();
+  const db = firebase.firestore();
+
+  db.collection("emotional_forest").get().then((querySnapshot) => {
+    console.log(querySnapshot);
+    //querySnapshot.forEach((doc) => {
+      //    console.log(`${doc.id} => ${doc.data()}`);
+      //});
+  });
+  /*
+  firebaseDB.collection('emotional_forest')
+  .add({
+    uuid: 2,
+    result: 2,
+    email: 'test123@email.com'
+  })
+  .then(function(docRef) {
+    console.log('Document written with ID: ', docRef.id)
+  })
+  .catch(function(error) {
+    console.error('Error adding document: ', error)
+  })
+  */
+
 })
