@@ -59,8 +59,8 @@ export function buttonsInit() {
       FB.ui({
         display: 'popup',
         method: 'share',
-        hashtag: '端傳媒',
-        href: 'https://theinitium.com/project/20180723-quiz-hongkong-literature/',
+        hashtag: '情緒の森',
+        href: targetUrl,
       }, function(response){
         console.log('facebook');
       });

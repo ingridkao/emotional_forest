@@ -14,9 +14,6 @@
   $.content{
     height: 70vh;
     margin: 15vh auto 0;
-    >div.question{
-      overflow-y: hidden;
-    }
   }
 }
 

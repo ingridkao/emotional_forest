@@ -61,7 +61,8 @@
   .result-email{
     margin: 1em 0;
     input{
-      width: 16em;
+      width: calc(100% - 6em);
+      min-width: 16em;
       padding: 0.8em 1em;
       border-radius: var(--border-radius-base);
       color: #555;

@@ -254,7 +254,7 @@ const questions = {
     }
 
     let scoreTitle = ['頹廢的考拉','孤獨的企鵝','暴躁的螞蜂','恐懼的兔子','操勞的驢媽媽','怕肥的橘貓','悲哀的狗狗','焦慮的小豬','皮卡端', '絕望的鯨魚'];
-    let shareText = `情緒の森：你是一隻${scoreTitle[maxIndex]}`;
+    let shareText = `情緒の森：我是一隻${scoreTitle[maxIndex]}，你是哪隻受傷的小動物呢？`;
     let scoreDesc = '';
 
     switch (maxIndex) {
