@@ -1,6 +1,6 @@
 .progress-bar {
   position: absolute 0 * * 0;
-  size: 100% 1em;
+  size: 100% 0.75em;
   border: none;
   appearance: none;
 }

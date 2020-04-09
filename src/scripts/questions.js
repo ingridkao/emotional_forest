@@ -243,10 +243,10 @@ const questions = {
         }
       }
     })
-    let awful = _.slice(scoreArray, 0, 8);
+    //let awful = _.slice(scoreArray, 0, 8);
     let maxIndex = 0;
-    if(scoreArray[8] == 0 && _.mean(awful) > 4){
-      //沒有正向選項且負面情緒平均大於4
+    if(scoreArray[8] == 0){
+      //沒有任何正向
       maxIndex = 9;
     }else{
       maxIndex = _.indexOf(scoreArray, _.max(scoreArray));
@@ -332,7 +332,6 @@ const questions = {
         break;
     }
 
-    //<h6 class="highlight-number">${scoreTitle[maxIndex]}</h6>
     const resultText = `
       <img src="images/result/${maxIndex}.png" alt="${scoreTitle[maxIndex]}">
       <div id="answer" data-index="${maxIndex}" class="resultDesc">
@@ -352,8 +351,6 @@ const questions = {
         ${scoreList}
       </ul>
     `;
-
-// <p>點擊關注<a href="https://theinitium.com">端傳媒</a>系列報導：<a href="https://theinitium.com/channel/lgbt/">LGBTQI，Ta 們不止這些字母而已</a></p>`
 
     // 分享标题:shareText
     return {resultText, shareText, resultTopList}

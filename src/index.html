@@ -48,6 +48,7 @@
 
       .progress-bar {
         background-color: Light_Color;
+        opacity: 0.5;
       }
       .progress-bar::-moz-progress-bar {
         background-color: Dark_Color;
@@ -130,10 +131,10 @@
           data-anchor="{{ issue_index+1 }}"
         >
           <a href="https://theinitium.com/" class="logo"></a>
-          <div v-show="issue.hidden" data-hidden="{{ issue.hidden }}">
-            progress
+
+          <!--<div v-show="issue.hidden" data-hidden="{{ issue.hidden }}"-->
             <progress class="progress-bar" value="{{ issue.progress }}" max="100"></progress>
-          </div>
+          <!--</div>-->
 
           <div class="content-wrap">
             <div class="issue content">
