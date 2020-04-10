@@ -5,39 +5,7 @@ import qrcode from 'qrcode-js'
 import assign from 'object.assign'
 import _ from 'lodash'
 
-import { firebase } from '@firebase/app';
-import '@firebase/firestore'
-
-// Initialize Firebase
-const firebaseConfig = {
-  apiKey: "AIzaSyDxpAVzIjYxoGsJZG-F0vO-Dx2aJdSKMgk",
-  authDomain: "initium-3e99c.firebaseapp.com",
-  databaseURL: "https://initium-3e99c.firebaseio.com",
-  projectId: "initium-3e99c",
-  storageBucket: "initium-3e99c.appspot.com",
-  messagingSenderId: "561143347672",
-  appId: "1:561143347672:web:b04d9714e8417b2dfe9aad",
-  measurementId: "G-EDTMBM9XFK"
-};
-firebase.initializeApp(firebaseConfig);
-const firestore = firebase.firestore();
-const animals = ['koala','penguin','bee','rabbit','donkey','cat','dog','pig','pikachuu', 'whale'];
-
-export function getAnimals(maxIndex) {
-  firestore.collection("koala").get().then((querySnapshot) => {
-
-//  firestore.collection(animals[maxIndex]).get().then((querySnapshot) => {
-    if (querySnapshot) {
-        console.log('count:' + querySnapshot.size);
-    } else {
-        console.log("No such document!");
-    }
-});
-}
-
 export function buttonsInit() {
-  const yourAnimals = getAnimals(0);
-
   $('.js-start-button').click(() => {
     $('input[type=radio]').prop('checked', false)
     $('input[type=checkbox]').prop('checked', false)
@@ -93,7 +61,7 @@ export function buttonsInit() {
         display: 'popup',
         method: 'share',
         hashtag: '情緒の森',
-        href: 'https://theinitium.com',
+        href: 'https://theinitium.com/project/20200411-quiz-emotionforest/',
       }, function(response){
         console.log('facebook');
       });
