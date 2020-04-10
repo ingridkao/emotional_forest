@@ -1,10 +1,6 @@
 import $ from 'jquery'
 import xdomain from 'xdomain'
 import Vue from 'vue'
-
-import { firebase } from '@firebase/app';
-import '@firebase/firestore'
-
 import assign from 'object.assign'
 import fullpageInit from './fullpage'
 import questions from './questions'
@@ -35,7 +31,7 @@ $(document).ready(() => {
       moreQuizzes: questions.more_quizzes,
       showModal: false,
       bingo: false,
-      modalText: '你答對了！',
+      modalText: '你答對了！'
     },
     components: {
       'intro': {
@@ -111,42 +107,4 @@ $(document).ready(() => {
       version: 'v2.9'
     });
   });
-
-  //Firebase
-  const firebaseConfig = {
-    apiKey: "AIzaSyDxpAVzIjYxoGsJZG-F0vO-Dx2aJdSKMgk",
-    authDomain: "initium-3e99c.firebaseapp.com",
-    databaseURL: "https://initium-3e99c.firebaseio.com",
-    projectId: "initium-3e99c",
-    storageBucket: "initium-3e99c.appspot.com",
-    messagingSenderId: "561143347672",
-    appId: "1:561143347672:web:b04d9714e8417b2dfe9aad",
-    measurementId: "G-EDTMBM9XFK"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  //firebase.analytics();
-  const db = firebase.firestore();
-
-  db.collection("emotional_forest").get().then((querySnapshot) => {
-    console.log(querySnapshot);
-    //querySnapshot.forEach((doc) => {
-      //    console.log(`${doc.id} => ${doc.data()}`);
-      //});
-  });
-  /*
-  firebaseDB.collection('emotional_forest')
-  .add({
-    uuid: 2,
-    result: 2,
-    email: 'test123@email.com'
-  })
-  .then(function(docRef) {
-    console.log('Document written with ID: ', docRef.id)
-  })
-  .catch(function(error) {
-    console.error('Error adding document: ', error)
-  })
-  */
-
-})
+});

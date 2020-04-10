@@ -1,11 +1,43 @@
 import $ from 'jquery'
-import { isProd } from './helpers'
 import url from 'url'
 import questions from './questions'
 import qrcode from 'qrcode-js'
 import assign from 'object.assign'
+import _ from 'lodash'
+
+import { firebase } from '@firebase/app';
+import '@firebase/firestore'
+
+// Initialize Firebase
+const firebaseConfig = {
+  apiKey: "AIzaSyDxpAVzIjYxoGsJZG-F0vO-Dx2aJdSKMgk",
+  authDomain: "initium-3e99c.firebaseapp.com",
+  databaseURL: "https://initium-3e99c.firebaseio.com",
+  projectId: "initium-3e99c",
+  storageBucket: "initium-3e99c.appspot.com",
+  messagingSenderId: "561143347672",
+  appId: "1:561143347672:web:b04d9714e8417b2dfe9aad",
+  measurementId: "G-EDTMBM9XFK"
+};
+firebase.initializeApp(firebaseConfig);
+const firestore = firebase.firestore();
+const animals = ['koala','penguin','bee','rabbit','donkey','cat','dog','pig','pikachuu', 'whale'];
+
+export function getAnimals(maxIndex) {
+  firestore.collection("koala").get().then((querySnapshot) => {
+
+//  firestore.collection(animals[maxIndex]).get().then((querySnapshot) => {
+    if (querySnapshot) {
+        console.log('count:' + querySnapshot.size);
+    } else {
+        console.log("No such document!");
+    }
+});
+}
 
 export function buttonsInit() {
+  const yourAnimals = getAnimals(0);
+
   $('.js-start-button').click(() => {
     $('input[type=radio]').prop('checked', false)
     $('input[type=checkbox]').prop('checked', false)
@@ -21,6 +53,7 @@ export function buttonsInit() {
     location = url.format(url_obj)
   })
 
+  //問卷按鈕按下的第一個進入點
   $('.js-show-result').click((event) => {
     const currentSlide = $(event.target).closest('.slide')
     if (!validateSlideInput(currentSlide)) return
@@ -85,9 +118,11 @@ export function buttonsInit() {
     } else if (platform === 'weibo') {
       let shareUrl = 'http://service.weibo.com/share/share.php?title=' + shareText + '&url=' + targetUrl
       window.open(shareUrl, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600')
+    } else if (platform === 'whatsapp') {
+      let shareUrl = 'https://api.whatsapp.com/send?text=' + targetUrl
+      window.open(shareUrl, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600')
     }
   })
-
   $('#mask').click(() => {
     document.getElementById('mask').style.display = 'none'
     document.getElementById('weixin_tips').style.display = 'none'
@@ -96,7 +131,12 @@ export function buttonsInit() {
     document.getElementById('mask').style.display = 'none'
     document.getElementById('weixin_tips').style.display = 'none'
   })
-
+  $('#creditsBtn').click(() => {
+    $('.creditsBox').fadeIn()
+  })
+  $('#creditsBoxClose').click(() => {
+    $('.creditsBox').hide()
+  })
   $('.close-banner').click(event => {
     const close = event.target.dataset.close
     console.log(close)
@@ -146,28 +186,64 @@ export function prevSlide(currentSlide) {
   }
 }
 
+export function getAnswers() {
+  // 計算答案
+  let scoreArray = [0,0,0,0,0,0,0,0,0];
+  $('.option input:checked').each(function () {
+    let string = $(this).data('score');
+    let score = string.split(',');
+    for (let index = 0; index < score.length; index++) {
+      if(score[index] > 0){
+        scoreArray[index] = scoreArray[index] + _.floor(score[index], 2);
+      }
+    }
+  })
+
+  return scoreArray;
+}
+
+export function getAnswerIndex(array) {
+  let maxIndex = 0;
+  if(array[8] == 0){
+    //沒有任何正向
+    maxIndex = 9;
+  }else{
+    maxIndex = _.indexOf(array, _.max(array));
+  }
+  return maxIndex;
+}
+
+//問卷送出按鈕按下的第二個進入點
 export function uploadData() {
+  const isProd = location.hostname !== 'localhost'
+                  && location.hostname !== '127.0.0.1'
+                  && location.hostname.indexOf('192.168.') === -1
+                  && location.hostname.indexOf('dev.') === -1;
+
   const apiPrefix = 'https://ss.initiumlab.com/'
   const urlRemember = apiPrefix + 'remember/'
   const urlUUID = apiPrefix + 'utility/uuid/'
   const eventname = `${window.vueInstant.eventname}${isProd ? '' : '_dev' }`;
   const key = 'answers'
+  const answers = collectAnswers();
 
-  const answers = collectAnswers()
+  const scoreArray = getAnswers();
+  const answerIndex = getAnswerIndex(scoreArray);
+
   const UA = 'navigator' in window && 'userAgent' in navigator && navigator.userAgent || ''
   const upload = JSON.stringify({ answers, UA })
 
   $.get(urlUUID).then(function (response) {
     let uuid = null
     uuid = response.data.uuid
-    //console.log(uuid)
     if (uuid) {
-      //console.log('Got uuid', uuid)
+      //1. firebase
+
+      //2. server event
       $.ajax(
         {
           url: urlRemember + eventname + '/',
           type: 'POST',
-          //dataType: 'JSON',
           contentType: 'application/json;charset=UTF-8',
           async: true,
           data: JSON.stringify({
@@ -177,13 +253,13 @@ export function uploadData() {
             raw: ''
           }),
           success: function(response){
-            //console.log(response)
+            console.log('server OK : ' + response.data)
           }
         }
       )
     }
   }, function(response){
-    //console.log('Error:' + response)
+    console.log('Error:' + response)
   })
 }
 
@@ -196,7 +272,7 @@ function collectAnswers() {
 
   const checkedAnswers = $('input:checked').map(function (index, elem) {
     return assign(getBasic(elem), {
-      score: parseInt($(elem).data('score'))
+      score: $(elem).data('score')
     })
   }).get()
 
@@ -260,3 +336,4 @@ function validateSlideInput(slide) {
     return valid
   }
 }
+

@@ -135,3 +135,34 @@
     }
   }
 }
+
+.fp-completely[data-anchor="result"]{
+  background-image: none !important;
+  background-color: #023b63;
+  footer a,
+  footer a:visited,
+  footer button{
+    color: #fff;
+  }
+  .logo{
+    background-image: url("../images/initium-logo-white.png");
+  }
+}
+
+.creditsBox{
+  display: none;
+  position: absolute;
+  z-index: 100;
+  bottom: 1em;
+  left: calc(50vw - 3em);
+  width: 12em;
+  background-color: #02508a;
+  border: 5px solid #010817;
+  padding: 1em;
+  color: #fff;
+  #creditsBoxClose{
+    width: 100%;
+    padding: 0.5em;
+    font-weight: bold;
+  }
+}

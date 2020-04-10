@@ -3,11 +3,18 @@ footer {
   width: 100%;
   padding: 1em;
   font-size: .75em;
-  color: #999;
-
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;
+  align-items:center;
+  a,
+  a:visited,
+  button {
+    color: #212023;
+    width: 13em;
+  }
   a {
     text-decoration: none;
-    color: #343434;
   }
 
   @media(--mobile-portrait) {

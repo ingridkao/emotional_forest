@@ -4,8 +4,7 @@ import url from 'url'
 import 'fullpage.js'
 import 'fullpage.js/vendors/scrolloverflow'
 import questions from './questions'
-import { isProd } from './helpers'
-import { uploadData } from './common'
+//import { uploadData } from './common'
 
 export default function initFullpage() {
   $('#fullpage').fullpage({
@@ -45,7 +44,6 @@ export default function initFullpage() {
         delete url_obj.hash
         const targetUrl = url.format(url_obj)
         $.get(`http://wechat-sign.initiumlab.com/sign?url=${location.href}`).then((response) => {
-          //console.log('sing resp:', response)
           wx.config({
             appId: 'wx20838cd205067e15', // 必填，公众号的唯一标识
             timestamp: response.timestamp, // 必填，生成签名的时间戳
@@ -89,7 +87,7 @@ export default function initFullpage() {
             dimensions: [size],
           })
         }
-        uploadData()
+        //uploadData()
       } else if (anchorLink === 'questions') {
         if (!$('#issue_banner').children().length) {
           new InitiumGPT({
@@ -107,7 +105,10 @@ export default function initFullpage() {
 
   // disabling scrolling
   $.fn.fullpage.setAllowScrolling(false, 'all')
-  if (isProd) {
+  if (location.hostname !== 'localhost'
+      && location.hostname !== '127.0.0.1'
+      && location.hostname.indexOf('192.168.') === -1
+      && location.hostname.indexOf('dev.') === -1) {
     $.fn.fullpage.setKeyboardScrolling(false, 'all')
   }
 }
