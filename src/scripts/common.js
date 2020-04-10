@@ -89,6 +89,9 @@ export function buttonsInit() {
     } else if (platform === 'whatsapp') {
       let shareUrl = 'https://api.whatsapp.com/send?text=' + targetUrl
       window.open(shareUrl, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600')
+    } else if (platform === 'telegram') {
+      let shareUrl = 'https://telegram.me/share/url?url=' + targetUrl + '&text=' + shareText
+      window.open(shareUrl)
     }
   })
   $('#mask').click(() => {
