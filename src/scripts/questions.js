@@ -321,12 +321,14 @@ const questions = {
       default:
         break;
     }
+    const yourAnimals = getAnimals(maxIndex);
 
     const resultText = `
       <div class="resultImg">
         <img src="images/result/${maxIndex}.png" alt="${scoreTitle[maxIndex]}">
       </div>
       <div id="answer" data-index="${maxIndex}" class="resultDesc">
+      <h6 class="samePeople">與 ${yourAnimals} 人相同</h6>
       ${scoreDesc}
       </div>
     `;
@@ -337,8 +339,6 @@ const questions = {
         scoreList += `<li>${scoreTitle[index]} : ${(scoreArray[index]/11*100).toFixed(1)}%</li>`;
       }
     }
-    //const yourAnimals = getAnimals(maxIndex);
-    //console.log(yourAnimals);
     let resultTopList = '';
     if(scoreList != ''){
       resultTopList = `

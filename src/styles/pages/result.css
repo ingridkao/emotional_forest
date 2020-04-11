@@ -37,6 +37,10 @@
         opacity: 0.5;
       }
     }
+    .samePeople{
+      text-align: right;
+      color: #82a7c5;
+    }
     &#resultTop3{
       text-align: left;
       margin: 0;

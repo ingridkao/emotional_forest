@@ -94,6 +94,24 @@ export function buttonsInit() {
       window.open(shareUrl)
     }
   })
+
+  $('.js-send').click(() => {
+    $.ajax(
+      {
+        url: 'http://awsnode-env.eba-5mnjrpyf.us-east-2.elasticbeanstalk.com/setEmail',
+        type: 'POST',
+        mimeType: 'multipart/form-data',
+        data: {
+          uuid: $('#uuidData').val(),
+          newemail: $('#email').val()
+        },
+        success: function(){
+          console.log('AWS: sand email ok' );
+        }
+      }
+    )
+  })
+
   $('#mask').click(() => {
     document.getElementById('mask').style.display = 'none'
     document.getElementById('weixin_tips').style.display = 'none'
@@ -184,6 +202,12 @@ export function getAnswerIndex(array) {
   return maxIndex;
 }
 
+export function getAnimals(index) {
+  let ansIndex = index;
+  let count = 0;
+  return count;
+}
+
 //問卷送出按鈕按下的第二個進入點
 export function uploadData() {
   const isProd = location.hostname !== 'localhost'
@@ -208,9 +232,25 @@ export function uploadData() {
     let uuid = null
     uuid = response.data.uuid
     if (uuid) {
-      //1. firebase
-
+      //1. Aws event
+      $('#uuidData').val(uuid);
+      $.ajax(
+        {
+          url: 'http://awsnode-env.eba-5mnjrpyf.us-east-2.elasticbeanstalk.com/setAnswer',
+          type: 'POST',
+          mimeType: 'multipart/form-data',
+          data: {
+            uuid: uuid,
+            answer: answerIndex,
+            email: 'none'
+          },
+          success: function(){
+            console.log('aws OK' );
+          }
+        }
+      )
       //2. server event
+      /*
       $.ajax(
         {
           url: urlRemember + eventname + '/',
@@ -228,6 +268,7 @@ export function uploadData() {
           }
         }
       )
+      */
     }
   }, function(response){
     console.log('Error:' + response)
