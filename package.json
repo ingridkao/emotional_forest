@@ -6,7 +6,8 @@
   "private": true,
   "dependencies": {
     "lodash": "^4.17.15",
-    "qrcode-js": "0.0.2"
+    "qrcode-js": "0.0.2",
+    "uuid": "^7.0.3"
   },
   "devDependencies": {
     "babel-core": "^6.9.1",

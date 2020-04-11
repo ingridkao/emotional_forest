@@ -4,6 +4,7 @@ import questions from './questions'
 import qrcode from 'qrcode-js'
 import assign from 'object.assign'
 import _ from 'lodash'
+import { v4 as uuidv4 } from 'uuid'
 
 export function buttonsInit() {
   $('.js-start-button').click(() => {
@@ -23,8 +24,10 @@ export function buttonsInit() {
 
   //問卷按鈕按下的第一個進入點
   $('.js-show-result').click((event) => {
+    console.log('result:ready');
     const currentSlide = $(event.target).closest('.slide')
     if (!validateSlideInput(currentSlide)) return
+    console.log('result:GO');
     uploadData()
     nextSection()
   })
@@ -96,9 +99,10 @@ export function buttonsInit() {
   })
 
   $('.js-send').click(() => {
+    console.log('Email send ready');
     $.ajax(
       {
-        url: 'http://awsnode-env.eba-5mnjrpyf.us-east-2.elasticbeanstalk.com/setEmail',
+        url: 'https://awsnode-env.eba-5mnjrpyf.us-east-2.elasticbeanstalk.com/setEmail',
         type: 'POST',
         mimeType: 'multipart/form-data',
         data: {
@@ -210,6 +214,36 @@ export function getAnimals(index) {
 
 //問卷送出按鈕按下的第二個進入點
 export function uploadData() {
+  console.log('uploadData start');
+
+  const scoreArray = getAnswers();
+  console.log('scoreArray:'+scoreArray);
+
+  const answerIndex = getAnswerIndex(scoreArray);
+  console.log('answerIndex:'+answerIndex);
+  
+  const uuid = uuidv4();
+  console.log('uuid:'+uuid);
+
+  if (uuid) {
+    $('#uuidData').val(uuid);
+    $.ajax(
+      {
+        url: 'https://awsnode-env.eba-5mnjrpyf.us-east-2.elasticbeanstalk.com/setAnswer',
+        type: 'POST',
+        mimeType: 'multipart/form-data',
+        data: {
+          uuid: uuid,
+          answer: answerIndex,
+          email: 'none'
+        },
+        success: function(){
+          console.log('aws OK' );
+        }
+      }
+    )
+  }
+  /*
   const isProd = location.hostname !== 'localhost'
                   && location.hostname !== '127.0.0.1'
                   && location.hostname.indexOf('192.168.') === -1
@@ -222,34 +256,12 @@ export function uploadData() {
   const key = 'answers'
   const answers = collectAnswers();
 
-  const scoreArray = getAnswers();
-  const answerIndex = getAnswerIndex(scoreArray);
-
   const UA = 'navigator' in window && 'userAgent' in navigator && navigator.userAgent || ''
   const upload = JSON.stringify({ answers, UA })
-
   $.get(urlUUID).then(function (response) {
     let uuid = null
     uuid = response.data.uuid
     if (uuid) {
-      //1. Aws event
-      $('#uuidData').val(uuid);
-      $.ajax(
-        {
-          url: 'http://awsnode-env.eba-5mnjrpyf.us-east-2.elasticbeanstalk.com/setAnswer',
-          type: 'POST',
-          mimeType: 'multipart/form-data',
-          data: {
-            uuid: uuid,
-            answer: answerIndex,
-            email: 'none'
-          },
-          success: function(){
-            console.log('aws OK' );
-          }
-        }
-      )
-      //2. server event
       $.ajax(
         {
           url: urlRemember + eventname + '/',
@@ -271,6 +283,7 @@ export function uploadData() {
   }, function(response){
     console.log('Error:' + response)
   })
+  */
 }
 
 function collectAnswers() {
