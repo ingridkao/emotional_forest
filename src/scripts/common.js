@@ -250,7 +250,6 @@ export function uploadData() {
         }
       )
       //2. server event
-      /*
       $.ajax(
         {
           url: urlRemember + eventname + '/',
@@ -268,7 +267,6 @@ export function uploadData() {
           }
         }
       )
-      */
     }
   }, function(response){
     console.log('Error:' + response)

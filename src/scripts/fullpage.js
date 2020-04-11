@@ -38,7 +38,9 @@ export default function initFullpage() {
       }
       if (anchorLink === 'result') {
         const results = questions.result()
-
+        $('#result').html(results.resultText);
+        $('#resultTop3').html(results.resultTopList);
+        /*
         let url_obj = url.parse(location.href, true)
         delete url_obj.search
         delete url_obj.hash
@@ -75,8 +77,7 @@ export default function initFullpage() {
           })
         })
 
-        $('#result').html(results.resultText);
-        $('#resultTop3').html(results.resultTopList);
+
 
         if (!$('#banner').children().length) {
           new InitiumGPT({
@@ -87,7 +88,8 @@ export default function initFullpage() {
             dimensions: [size],
           })
         }
-        //uploadData()
+        uploadData()
+        */
       } else if (anchorLink === 'questions') {
         if (!$('#issue_banner').children().length) {
           new InitiumGPT({
