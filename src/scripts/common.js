@@ -24,10 +24,8 @@ export function buttonsInit() {
 
   //問卷按鈕按下的第一個進入點
   $('.js-show-result').click((event) => {
-    console.log('result:ready');
     const currentSlide = $(event.target).closest('.slide')
     if (!validateSlideInput(currentSlide)) return
-    console.log('result:GO');
     uploadData()
     nextSection()
   })
@@ -98,23 +96,47 @@ export function buttonsInit() {
     }
   })
 
+  let againEmail = false;
   $('.js-send').click(() => {
-    console.log('Email send ready');
-    $.ajax(
-      {
-        url: 'https://awsnode-env.eba-5mnjrpyf.us-east-2.elasticbeanstalk.com/setEmail',
-        type: 'POST',
-        mimeType: 'multipart/form-data',
-        data: {
-          uuid: $('#uuidData').val(),
-          newemail: $('#email').val()
-        },
-        success: function(){
-          console.log('AWS: sand email ok' );
+    let newEmail = $('#email').val();
+    if(againEmail){
+      $('#errorText').text('無法重複送出');
+      $('#errorText').show();
+    }else{
+      if(newEmail == ''){
+        $('#errorText').text('請輸入');
+        $('#errorText').show();
+      }else{
+        let emailreg = /^[^\[\]\(\)\\<>:;,@.]+[^\[\]\(\)\\<>:;,@]*@[a-z0-9A-Z]+(([.]?[a-z0-9A-Z]+)*[-]*)*[.]([a-z0-9A-Z]+[-]*)+$/g;
+        if(emailreg.test(newEmail)){
+          $.ajax(
+            {
+              url: 'https://awsnode-env.eba-5mnjrpyf.us-east-2.elasticbeanstalk.com/setEmail',
+              type: 'POST',
+              mimeType: 'multipart/form-data',
+              data: {
+                uuid: $('#uuidData').val(),
+                newemail: newEmail
+              },
+              success: function(){
+                console.log('AWS: sand email ok' );
+                $('#succesText').show();
+                againEmail = true;
+              }
+            }
+          )
+        }else{
+          $('#errorText').text('Email格式不對');
+          $('#errorText').show();
         }
       }
-    )
+    }
   })
+
+  $('#email').on('keyup', function(){
+    $('#succesText').hide();
+    $('#errorText').hide();
+  });
 
   $('#mask').click(() => {
     document.getElementById('mask').style.display = 'none'
@@ -214,16 +236,11 @@ export function getAnimals(index) {
 
 //問卷送出按鈕按下的第二個進入點
 export function uploadData() {
-  console.log('uploadData start');
-
   const scoreArray = getAnswers();
-  console.log('scoreArray:'+scoreArray);
 
   const answerIndex = getAnswerIndex(scoreArray);
-  console.log('answerIndex:'+answerIndex);
   
   const uuid = uuidv4();
-  console.log('uuid:'+uuid);
 
   if (uuid) {
     $('#uuidData').val(uuid);

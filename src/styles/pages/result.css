@@ -71,6 +71,14 @@
       border-radius: var(--border-radius-base);
       color: #555;
     }
+    #succesText{
+      display: none;
+      color: #67bf6a;
+    }
+    #errorText{
+      display: none;
+      color: #e49292;
+    }
   }
   .result-btns{
     height: 3.5em;

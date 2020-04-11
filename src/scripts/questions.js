@@ -321,14 +321,13 @@ const questions = {
       default:
         break;
     }
-    const yourAnimals = getAnimals(maxIndex);
+    //const yourAnimals = getAnimals(maxIndex);
 
     const resultText = `
       <div class="resultImg">
         <img src="images/result/${maxIndex}.png" alt="${scoreTitle[maxIndex]}">
       </div>
       <div id="answer" data-index="${maxIndex}" class="resultDesc">
-      <h6 class="samePeople">與 ${yourAnimals} 人相同</h6>
       ${scoreDesc}
       </div>
     `;
