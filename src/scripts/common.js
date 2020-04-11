@@ -51,21 +51,24 @@ export function buttonsInit() {
   $('.js-share-btn').on('click', function(event) {
     const platform = $(this).data('platform')
     let url_obj = url.parse(location.href, true)
-
-    const shareText = questions.result().shareText
     delete url_obj.search
     delete url_obj.hash
-    const targetUrl = encodeURIComponent(url.format(url_obj))
 
+    const shareText = questions.result().shareText;
+
+    const targetUrl = encodeURIComponent(url.format(url_obj))
     if (platform === 'facebook') {
-      FB.ui({
-        display: 'popup',
-        method: 'share',
-        hashtag: '情緒の森',
-        href: 'https://theinitium.com/project/20200411-quiz-emotionforest/',
-      }, function(response){
-        console.log('facebook');
-      });
+      let imgURL = `${url_obj.href}images/fb/${questions.result().resultIndex}.png`;
+      let shareURL = `${url_obj.href}${questions.result().resultIndex}.html`;
+
+      let fbshare = 'https://www.facebook.com/sharer/sharer.php';
+      fbshare += '?u=' + encodeURIComponent(shareURL);
+      fbshare += '&quote=' + encodeURIComponent(shareText);
+      fbshare += '&picture=' + encodeURIComponent(imgURL);
+      fbshare += '&caption='+ encodeURIComponent(questions.title);
+
+      window.open(fbshare, "_blank", "toolbar=0,status=0");
+
     } else if (platform === 'twitter') {
       let shareUrl = 'https://twitter.com/intent/tweet?url=' + targetUrl
       window.open(shareUrl)
@@ -97,7 +100,8 @@ export function buttonsInit() {
   })
 
   let againEmail = false;
-  $('.js-send').click(() => {
+  $('#sendEmailBtn').on('click', function(event) {
+    let uuidData = $('#uuidData').html();
     let newEmail = $('#email').val();
     if(againEmail){
       $('#errorText').text('無法重複送出');
@@ -113,15 +117,20 @@ export function buttonsInit() {
             {
               url: 'https://awsnode-env.eba-5mnjrpyf.us-east-2.elasticbeanstalk.com/setEmail',
               type: 'POST',
+              async: true,
               mimeType: 'multipart/form-data',
               data: {
-                uuid: $('#uuidData').val(),
+                uuid: uuidData,
                 newemail: newEmail
               },
               success: function(){
                 console.log('AWS: sand email ok' );
                 $('#succesText').show();
                 againEmail = true;
+              },
+              error: function(){
+                $('#errorText').text('錯誤');
+                $('#errorText').show();
               }
             }
           )
@@ -131,7 +140,7 @@ export function buttonsInit() {
         }
       }
     }
-  })
+  });
 
   $('#email').on('keyup', function(){
     $('#succesText').hide();
@@ -228,26 +237,22 @@ export function getAnswerIndex(array) {
   return maxIndex;
 }
 
-export function getAnimals(index) {
-  let ansIndex = index;
-  let count = 0;
-  return count;
-}
-
 //問卷送出按鈕按下的第二個進入點
 export function uploadData() {
   const scoreArray = getAnswers();
+  const answers = collectAnswers();
 
   const answerIndex = getAnswerIndex(scoreArray);
   
   const uuid = uuidv4();
 
   if (uuid) {
-    $('#uuidData').val(uuid);
+    $('#uuidData').html(uuid);
     $.ajax(
       {
         url: 'https://awsnode-env.eba-5mnjrpyf.us-east-2.elasticbeanstalk.com/setAnswer',
         type: 'POST',
+        async: true,
         mimeType: 'multipart/form-data',
         data: {
           uuid: uuid,
@@ -271,7 +276,6 @@ export function uploadData() {
   const urlUUID = apiPrefix + 'utility/uuid/'
   const eventname = `${window.vueInstant.eventname}${isProd ? '' : '_dev' }`;
   const key = 'answers'
-  const answers = collectAnswers();
 
   const UA = 'navigator' in window && 'userAgent' in navigator && navigator.userAgent || ''
   const upload = JSON.stringify({ answers, UA })

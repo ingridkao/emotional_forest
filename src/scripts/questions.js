@@ -3,7 +3,6 @@ import _ from 'lodash'
 
 import { getAnswers } from './common'
 import { getAnswerIndex } from './common'
-import { getAnimals } from './common'
 
 const questions = {
   slug: '20200411-quiz-emotionforest',
@@ -240,14 +239,15 @@ const questions = {
     // 計算答案
     const scoreArray = getAnswers();
     //let awful = _.slice(scoreArray, 0, 8);
-    const maxIndex = getAnswerIndex(scoreArray);
+    const resultIndex = getAnswerIndex(scoreArray);
 
-    const scoreTitle = ['頹廢的樹熊','孤獨的企鵝','暴躁的螞蜂','恐懼的兔子','操勞的驢媽媽','怕肥的橘貓','悲哀的狗狗','焦慮的小豬','比卡端', '絕望的鯨魚'];
-    const shareText = `情緒の森：我是一隻${scoreTitle[maxIndex]}，你是哪隻受傷的小動物呢？`;
+    const scoreTitle = ['頹廢樹熊','孤獨企鵝','暴躁蜂','恐懼兔','操勞驢媽媽','怕肥橘貓','悲哀狗狗','焦慮小豬','比卡端', '絕望鯨魚'];
+    let shareText = `情緒の森，你是哪隻受傷的小動物呢？`;
     let scoreDesc = '';
 
-    switch (maxIndex) {
+    switch (resultIndex) {
       case 0:
+        shareText = '我是一隻頹廢樹熊，我會慢慢翻滾起來，不再停滯！';
         scoreDesc = `<p>覺得自己沒用這件事情，不是一天兩天啦。</p>
                     <p>曾自覺得可以一鳴驚人，呼風喚雨。今天卻在渾渾噩噩裏又睡掉整個早上，然後恨自己，又縱容自己，再揮霍一天吧，明天重新做人。世界在沉淪，我又何嘗不是，固然可以怪天災人禍，但心底裏最怪的是無所作為的自己。</p> 
                     <p>劃手機看整個世界在眼前呼嘯前行時，讀到一個叫郭晶的女孩，她在封鎖的武漢市內一筆一畫寫每天的晚餐，和朋友的對話，寫空曠街道上騎行的所見——譬如一兩個清潔工阿姨，牙齒有煙漬的中年男子。她的生活那樣小，卻那樣鮮活，她24小時裏經驗的多過我這一個月。</p> 
@@ -255,6 +255,7 @@ const questions = {
                     <p class="autor">端傳媒Game On 楊靜</p>`;
         break;
       case 1:
+        shareText = '我是一隻孤獨企鵝，但我知道孤獨其實是回到自我相處和生活本身。';
         scoreDesc = `<p>我是一隻孤獨且笨拙的企鵝，也許，你和我一樣，正在一遍遍翻轉手機，等待某個人的信息。</p>
                     <p>見不到面時，時常會懷疑自己掉入黑洞，手機沉默的時間總比我預想要長，計較訊息裏每個字和貼圖的含義，試圖在點讚和評論中證實自己依舊被愛。所有真實社交都依靠無法傳遞溫度的網線連結，一不小心就可能被誤解、爭執或舉報剪斷，流放到網絡世界的孤島。</p>
                     <p>後來索性關掉手機，拿鋼筆和顏色筆塗畫無法分享的感受。再把自己丟進忙碌的工作裏，聽我走不進的土地上發生著什麼。相比整個世界的沉淪，一個人的隔離顯得微不足道。用木心的話說，生活是時時刻刻不知如何是好。</p>
@@ -262,6 +263,7 @@ const questions = {
                     <p class="autor">端傳媒中國組 Iris</p>`;
         break;
       case 2:
+        shareText = '我是一隻暴躁蜂，刺，就該用來戳破虛偽！';
         scoreDesc = `<p>疫情期間，我見到海量惡意揣測和流言。這些信息在人們囫圇吞棗之後，又被粗暴推向更遠的地方。然而本可以反駁它們的友鄰，在社交平台上沒有任何表示。也許疫情在他們的時間線上，只是一次繞城公路的堵車</p>
                     <p>我討厭這種轉過頭去的姿勢。無論它們是下意識的鴕鳥心態，還是潛藏更深的自私或惡意，都讓他人的生活更加艱難。就好像在高速公路上疲勞駕駛，那些本可讓我警覺的徵兆被空氣清新劑假扮出鳥語花香，如何不暴躁？想順利開下去，我必須報以刺耳的鳴笛。</p>
                     <p>刺，就該用來戳破虛偽，溫柔留給那些坦誠的藝術。</p>
@@ -269,6 +271,7 @@ const questions = {
                     <p class="autor">端傳媒文化組 書瑋</p>`;
         break;
       case 3:
+        shareText = '我是一隻驚恐兔，一起來以恐怖吞噬恐懼，忘卻病毒橫行的世界！';
         scoreDesc = `<p>從超市買東西回家，接下來是浩大的消毒工程：雙腳把鞋子蹭掉，摘下口罩捲好扔掉，按醫護標準洗手20秒，用酒精噴霧把袋裏東西噴一遍，用消毒濕紙巾把每件物品拎出來擦乾淨。衣褲換掉，洗個熱水澡，記得洗頭，如果要做飯，還得洗很多遍手。</p>
                     <p>日防夜防，室友卻告訴我，她公司有人確診……</p>
                     <p>萬一我被感染進隔離病房，是不是得採訪寫稿，別浪費現場？可如果病得很重，如果精神休養不好，如果肺功能從此失去幾成……胡思亂想、天馬行空，恐怖漫畫和電視劇成了睡前安眠藥——德古拉、朝鮮喪屍、Hill House的秘密、黑盒子的怪力亂神……</p>
@@ -276,6 +279,7 @@ const questions = {
                     <p class="autor">端傳媒香港組 奇洛李維斯</p>`;
         break;
       case 4:
+        shareText = '我是一隻驢媽媽，自我鞭笞，痛與快樂渾然無分。';
         scoreDesc = `<p>同一時間完成多重任務、除了抱怨沒有其他逃脫生活密室方法的驢，才是宇宙奧秘的窺探者。</p>
                     <p>而秘密就是，生存源自受虐與自虐。Master or Servant，兩個都是你。</p>
                     <p>在家的日子多了，意味著原來被自己外判的，要被重新拎回來自己解決。你要照顧的，一個個坐在蛛網結點上，你腰纏絲絲孽債，要去承托生活的一盤陣法。繩網，身上血痕很易見，心上的，誰知道？——我願意知道。</p>
@@ -283,6 +287,7 @@ const questions = {
                     <p class="autor">端傳媒文化組 疏影</p>`;
         break;
       case 5:
+        shareText = '我是一隻怕肥橘貓，吃能解百憂，吃完也努力走一走。';
         scoreDesc = `<p>困在家裏不吃點什麼，很難鼓起勇氣面對每天絕望的新聞，久而久之，我也變得和你一樣，缺乏運動。</p>
                     <p>睡夢裏我念著台北的牛肉麵，碗邊騰起的熱氣，入口即化的牛肉，連帶小小牛油，混著牛骨熬成的湯和店家多年密調的醬汁的香味，一起融進爽滑綿柔的麵裏，一切都是那麼的恰到好處……疫情間我又學會六七種菜色，美食總能安慰到悲傷的靈魂。但吃太多也有些困擾，譬如長胖……</p>
                     <p>我在過去半年減掉40斤體重，也許能給些建議：保持每天在社區裏走走看看，超過1萬步；若無法外出，不妨找枕頭或乾淨的衣服做平板撐，初學者每次控制一分鐘，每天三五組就好。</p>
@@ -290,6 +295,7 @@ const questions = {
                     <p class="autor">端傳媒社媒組 小刀</p>`;
         break;
       case 6:
+        shareText = '我是一隻悲傷狗，我的悲哀無法立即化解，不如一起接受它的存在。';
         scoreDesc = `<p>你感到的，叫做悲哀，我與你一樣。</p>
                     <p>這份悲哀像一條橫跨天際的痕跡，從武漢出發，慢慢砸向我生活的城市，消失在密集的屋頂上空，取走街頭生機，又繼續出發下一個地點。望向天空時，就知道它又去哪裏。其實，我什麼都看不到——那些正在發生的絕望，那個「一切都是暫時」的承諾。</p>
                     <p>研究悲傷的醫生 David Kessler 說，疫情下的那種不安有個名字，叫做悲傷——「如果我們允許這些情緒的存在，它們會按序發生。那麼我們便不再是受害者了。」</p>
@@ -298,6 +304,7 @@ const questions = {
                     <p class="autor">端傳媒國際組 lulu</p>`;
         break;
       case 7:
+        shareText = '我是一隻焦慮豬，偶爾看看招聘廣告，幻想未來會不一樣⋯⋯';
         scoreDesc = `<p>在世界崩壞，疫情肆虐時，我還在緊張找工作的事。</p>
                     <p>畢業後一直沒認真找工作，以為大部分工作都是智力正常、有基本待人處事能力就可以勝任。但原來搵工難，自己什麼都不會，還要學懂自誇的HR語言。</p>
                     <p>一份推銷員工作終於有眉目，春節後上班。不過疫情突至，公司裁員，我還沒上班就失業。招聘平台的廣告也沒有更新，每天新聞都傳來裁員和停業的報導。世界這麼多死傷，人類文明毀壞，香港的社會運動不知何去何從，而我卻煩惱於怎樣活在「舊秩序」中：我什麼時候才能找到工作？</p>
@@ -305,6 +312,7 @@ const questions = {
                     <p class="autor">端傳媒特約撰稿人 林婷婷</p>`;
         break;
       case 8:
+        shareText = '我是一隻比卡端，奔跑著，積聚閃電，照亮黑暗！';
         scoreDesc = `<p>我也是比卡端，今天我不關心人類，我只關心你。</p>
                     <p>在災難中，純粹的樂觀是個偽命題。人總是站在如此絕境，一代又一代。卡繆說，唯一嚴肅的哲學問題就是自殺。我們往往處在這樣的黑暗中，思考為甚麼不自殺。在私人層面上，處理負面情緒的第一步就是承認接受它；在公共層面上，突破問題的起點是理解甚至擁抱它們的結構性根源。</p>
                     <p>然而「人」的存在並不完全被「結構」所限。人是能改變的，如水波中跳躍的陽光，帶來流水線與機器之外的「錯位」之美，也會帶來閃爍的「希望」——拋棄結構加諸自身的枷鎖，重新發現與他人、世界的關係。</p>
@@ -313,6 +321,7 @@ const questions = {
                     <p class="autor">端傳媒評論組 雨欣</p>`;
         break;
       case 9:
+        shareText = '我是一隻絕望鯨，期待發現閃光的線，順著它找到想做的事情';
         scoreDesc = `<p>「樂觀的人只是信息不靈通的人。」韋爾貝在短篇集《大樹》中寫。淺薄如我，也會對盲目相信「明天會更好」的人敬而遠之。樂觀很可能源於懶惰。而絕望，大抵是人勤奮好學地掌握了盡可能多的信息後，體會到的第一層感受。作為新聞從業者，我每一天都浸泡在這種絕望裏，要花費力氣消化那些令人悲憤的信息。</p>
                     <p>但我願意把這種感受視作一個人決定生活在真實世界的代價，以及，一個新的開端——世界可真是糟透了，我們可以做點什麼呢？人類社會做出的一切努力，從女團選秀到探索外星生命，無論是有意無意都是在抵抗這種絕望。</p>
                     <p>接受、消化這種絕望，並帶著它負重前行，漫長且辛苦。不如多給自己點時間，偶爾耍廢沒什麼大不了，和朋友分享絕望心得，閱讀、思考、運動，堅持這樣做，期待有天你會在絕望裏發現一條閃光的線，順著它走，找到想做的事情——那便是你抵抗絕望的最佳手段。在此之前，hang in there.</p>
@@ -321,20 +330,19 @@ const questions = {
       default:
         break;
     }
-    //const yourAnimals = getAnimals(maxIndex);
 
     const resultText = `
       <div class="resultImg">
-        <img src="images/result/${maxIndex}.png" alt="${scoreTitle[maxIndex]}">
+        <img src="images/result/${resultIndex}.png" alt="${scoreTitle[resultIndex]}">
       </div>
-      <div id="answer" data-index="${maxIndex}" class="resultDesc">
+      <div id="answer" data-index="${resultIndex}" class="resultDesc">
       ${scoreDesc}
       </div>
     `;
 
     let scoreList = '';
     for (let index = 0; index < scoreArray.length; index++) {
-      if(scoreArray[index] != maxIndex && scoreArray[index] > _.mean(scoreArray)){
+      if(scoreArray[index] != resultIndex && scoreArray[index] > _.mean(scoreArray)){
         scoreList += `<li>${scoreTitle[index]} : ${(scoreArray[index]/11*100).toFixed(1)}%</li>`;
       }
     }
@@ -349,7 +357,7 @@ const questions = {
     }
 
     // 分享标题:shareText
-    return {resultText, shareText, resultTopList}
+    return {resultText, shareText, resultTopList, resultIndex}
   }
 }
 
