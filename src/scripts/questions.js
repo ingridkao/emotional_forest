@@ -336,6 +336,7 @@ const questions = {
         <img src="images/result/${resultIndex}.png" alt="${scoreTitle[resultIndex]}">
       </div>
       <div id="answer" data-index="${resultIndex}" class="resultDesc">
+      <p id="samePeople">和 <span></span> 人相同<p>
       ${scoreDesc}
       </div>
     `;

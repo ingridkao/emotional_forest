@@ -37,7 +37,7 @@
         opacity: 0.5;
       }
     }
-    .samePeople{
+    #samePeople{
       text-align: right;
       color: #82a7c5;
     }

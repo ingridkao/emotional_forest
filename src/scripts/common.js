@@ -100,46 +100,56 @@ export function buttonsInit() {
   })
 
   let againEmail = false;
-  $('#sendEmailBtn').on('click', function(event) {
-    let uuidData = $('#uuidData').html();
-    let newEmail = $('#email').val();
-    if(againEmail){
-      $('#errorText').text('無法重複送出');
-      $('#errorText').show();
-    }else{
-      if(newEmail == ''){
-        $('#errorText').text('請輸入');
-        $('#errorText').show();
-      }else{
-        let emailreg = /^[^\[\]\(\)\\<>:;,@.]+[^\[\]\(\)\\<>:;,@]*@[a-z0-9A-Z]+(([.]?[a-z0-9A-Z]+)*[-]*)*[.]([a-z0-9A-Z]+[-]*)+$/g;
-        if(emailreg.test(newEmail)){
-          $.ajax(
-            {
-              url: 'https://awsnode-env.eba-5mnjrpyf.us-east-2.elasticbeanstalk.com/setEmail',
-              type: 'POST',
-              async: true,
-              mimeType: 'multipart/form-data',
-              data: {
-                uuid: uuidData,
-                newemail: newEmail
-              },
-              success: function(){
-                console.log('AWS: sand email ok' );
-                $('#succesText').show();
-                againEmail = true;
-              },
-              error: function(){
-                $('#errorText').text('錯誤');
-                $('#errorText').show();
-              }
-            }
-          )
-        }else{
-          $('#errorText').text('Email格式不對');
+  $('#sendEmailBtn').on('click', function() {
+    const apiPrefix = 'https://ss.initiumlab.com/'
+    const urlUUID = apiPrefix + 'utility/uuid/'
+    const urlRemember = apiPrefix + 'remember/'
+    const eventname = 'emotional_forest'
+    
+    $.get(urlUUID).then(function (response) {
+      let uuid = null
+      uuid = response.data.uuid
+      if (uuid) {
+        const answerIndex = $('#answer').data('index');
+        const answerKey = 'answer' + answerIndex;
+        const newEmail = $('#email').val();
+    
+        if(againEmail){
+          $('#errorText').text('已經送出過囉');
           $('#errorText').show();
+        }else{
+          if(newEmail == ''){
+            $('#errorText').text('請輸入');
+            $('#errorText').show();
+          }else{
+            let emailreg = /^[^\[\]\(\)\\<>:;,@.]+[^\[\]\(\)\\<>:;,@]*@[a-z0-9A-Z]+(([.]?[a-z0-9A-Z]+)*[-]*)*[.]([a-z0-9A-Z]+[-]*)+$/g;
+            if(emailreg.test(newEmail)){
+              $.ajax(
+                {
+                  url: urlRemember + eventname + '/',
+                  type: 'POST',
+                  contentType: 'application/json;charset=UTF-8',
+                  async: true,
+                  data: JSON.stringify({
+                    username: uuid,
+                    key:answerKey,
+                    value: `{"answers":[{"email":"${newEmail}","uuid":"${uuid}1","answer":"${answerIndex}"}]}`,
+                    raw: ''
+                  }),
+                  success: function(response){
+                    $('#succesText').text('已送出');
+                    $('#succesText').show();
+                  }
+                }
+              );
+            }else{
+              $('#errorText').text('Email格式不對');
+              $('#errorText').show();
+            }
+          }
         }
       }
-    }
+    });
   });
 
   $('#email').on('keyup', function(){
@@ -240,49 +250,22 @@ export function getAnswerIndex(array) {
 //問卷送出按鈕按下的第二個進入點
 export function uploadData() {
   const scoreArray = getAnswers();
-  const answers = collectAnswers();
-
   const answerIndex = getAnswerIndex(scoreArray);
   
-  const uuid = uuidv4();
-
-  if (uuid) {
-    $('#uuidData').html(uuid);
-    $.ajax(
-      {
-        url: 'https://awsnode-env.eba-5mnjrpyf.us-east-2.elasticbeanstalk.com/setAnswer',
-        type: 'POST',
-        async: true,
-        mimeType: 'multipart/form-data',
-        data: {
-          uuid: uuid,
-          answer: answerIndex,
-          email: 'none'
-        },
-        success: function(){
-          console.log('aws OK' );
-        }
-      }
-    )
-  }
-  /*
-  const isProd = location.hostname !== 'localhost'
-                  && location.hostname !== '127.0.0.1'
-                  && location.hostname.indexOf('192.168.') === -1
-                  && location.hostname.indexOf('dev.') === -1;
-
   const apiPrefix = 'https://ss.initiumlab.com/'
   const urlRemember = apiPrefix + 'remember/'
+  const urlRecall = apiPrefix + 'recall/';
   const urlUUID = apiPrefix + 'utility/uuid/'
-  const eventname = `${window.vueInstant.eventname}${isProd ? '' : '_dev' }`;
-  const key = 'answers'
 
-  const UA = 'navigator' in window && 'userAgent' in navigator && navigator.userAgent || ''
-  const upload = JSON.stringify({ answers, UA })
+  const eventname = 'emotional_forest'
+  const answerkey = 'answer'+answerIndex
+  //1
   $.get(urlUUID).then(function (response) {
     let uuid = null
     uuid = response.data.uuid
     if (uuid) {
+      console.log('Got uuid', uuid)
+      //2
       $.ajax(
         {
           url: urlRemember + eventname + '/',
@@ -291,20 +274,30 @@ export function uploadData() {
           async: true,
           data: JSON.stringify({
             username: uuid,
-            key,
-            value: upload,
+            key: answerkey,
+            value: `{"answers":[{"email":"","uuid":"${uuid}","answer":"${answerIndex}"}]}`,
             raw: ''
           }),
           success: function(response){
-            console.log('server OK : ' + response.data)
+            console.log(response);
+            //3
+            $.get(urlRecall + eventname + '/' + answerkey +'/').then(function(response){
+              
+              console.log(response);
+              console.log('Success:');
+              $('#samePeople > span').html(response.values.length);
+              callback(response)
+            }, function(response){
+              console.log('Error:');
+              console.log(response);
+            })
           }
         }
-      )
+      );
     }
   }, function(response){
     console.log('Error:' + response)
   })
-  */
 }
 
 function collectAnswers() {
