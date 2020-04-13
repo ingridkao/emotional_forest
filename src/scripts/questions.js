@@ -25,6 +25,7 @@ const questions = {
   issues: [
     {
       question: ' 1 今天又是全球被冠狀病毒疫情籠罩下的一天，而你的一天',
+      comment: '（本測試所有題目均可選取多個答案）',
       image: false,
       scoreTag: 'familiarity',
       type: 'choice',

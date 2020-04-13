@@ -98,13 +98,4 @@ $(document).ready(() => {
       buttonsInit()
     }
   })
-
-  //Facebook
-  $.ajaxSetup({ cache: true });
-  $.getScript('https://connect.facebook.net/en_US/sdk.js', function(){
-    FB.init({
-      appId: '604150659788933',
-      version: 'v2.9'
-    });
-  });
 });

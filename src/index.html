@@ -129,7 +129,6 @@
           <div class="content-wrap">
             <div class="issue content">
               <issue-question :issue="issue"></issue-question>
-
               <ul class="options">
                 <range-options
                   :issue="issue"
@@ -151,6 +150,7 @@
               </ul>
 
               <div>
+                <p v-if="issue_index == 0" style="float: left;">{{ issue.comment }}</p>
                 <button v-if="issue_index !== 0" class="nav-btn issue-btn issue-btn--left js-show-prev" type="button">
                   上一題
                 </button>
