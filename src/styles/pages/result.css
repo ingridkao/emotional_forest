@@ -17,14 +17,20 @@
     margin: 0.5em 0;
   }
 }
-
+.samePeople{
+  color: #82a7c5;
+  position: relative;
+  text-align: left;
+  padding: 0 1em;
+  margin: -2.5em 0 0 0;
+}
 .result.content{
   max-width: 28em;
   height: calc(100vh - 4em);
   margin: 2em auto;
   padding: 0;
   .result-content{
-    margin: 0.5em;
+    margin: .5em .5em 0;
     .resultDesc{
       width: 96%;
       word-break: break-word;
@@ -36,10 +42,6 @@
         font-size: 0.8em;
         opacity: 0.5;
       }
-    }
-    #samePeople{
-      text-align: right;
-      color: #82a7c5;
     }
     &#resultTop3{
       text-align: left;

@@ -169,7 +169,7 @@ export function buttonsInit() {
   })
   $('.close-banner').click(event => {
     const close = event.target.dataset.close
-    console.log(close)
+    //console.log(close)
     if (close && close.length) {
       $(`[data-close="${close}"]`).hide()
       $(`#${close}`).hide()
@@ -216,33 +216,6 @@ export function prevSlide(currentSlide) {
   }
 }
 
-export function getAnswers() {
-  // 計算答案
-  let scoreArray = [0,0,0,0,0,0,0,0,0];
-  $('.option input:checked').each(function () {
-    let string = $(this).data('score');
-    let score = string.split(',');
-    for (let index = 0; index < score.length; index++) {
-      if(score[index] > 0){
-        scoreArray[index] = scoreArray[index] + _.floor(score[index], 2);
-      }
-    }
-  })
-
-  return scoreArray;
-}
-
-export function getAnswerIndex(array) {
-  let maxIndex = 0;
-  if(array[8] == 0){
-    //沒有任何正向
-    maxIndex = 9;
-  }else{
-    maxIndex = _.indexOf(array, _.max(array));
-  }
-  return maxIndex;
-}
-
   //問卷送出按鈕按下的第二個進入點
   export function uploadData() {
     const apiPrefix = 'https://ss.initiumlab.com/'
@@ -250,11 +223,15 @@ export function getAnswerIndex(array) {
     const urlRemember = apiPrefix + 'remember/'
     const urlRecall = apiPrefix + 'recall/';
     const eventname = 'emotional_forest'
-    const scoreArray = getAnswers();
-    const answerIndex = getAnswerIndex(scoreArray);
+
+    const results = questions.result();
+    const answerIndex = results.resultIndex;
+    $('#result').html(results.resultText);
+    $('#resultTop3').html(results.resultTopList);
+
     const answerkey = 'answer' + answerIndex;
-    
     localStorage.setItem('answerIndex', answerIndex);
+
     let uuid = localStorage.uuid;
     //1
     if (!uuid){
@@ -279,15 +256,15 @@ export function getAnswerIndex(array) {
         raw: ''
       }),
       success: function(response){
-        console.log(response);
+        console.log('update success');
+        //console.log(response);
         //3
         $.get(urlRecall + eventname + '/' + answerkey +'/').then(function(response){
-          console.log(response);
-          console.log('Success:');
-          $('#samePeople > span').html(response.values.length);
+          console.log('Get same answer');
+          $('.samePeople span').html(response.values.length);
         }, function(response){
           console.log('Error:');
-          console.log(response);
+          //console.log(response);
         })
       }
     });

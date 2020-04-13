@@ -37,10 +37,10 @@ export default function initFullpage() {
         size = [320, 50]
       }
       if (anchorLink === 'result') {
+        /*
         const results = questions.result()
         $('#result').html(results.resultText);
         $('#resultTop3').html(results.resultTopList);
-        /*
         let url_obj = url.parse(location.href, true)
         delete url_obj.search
         delete url_obj.hash
