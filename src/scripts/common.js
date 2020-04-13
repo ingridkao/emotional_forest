@@ -57,13 +57,12 @@ export function buttonsInit() {
 
     const targetUrl = encodeURIComponent(url.format(url_obj))
     if (platform === 'facebook') {
-      let imgURL = `${url_obj.href}images/fb/${questions.result().resultIndex}.png`;
-      let shareURL = `${url_obj.href}${questions.result().resultIndex}.html`;
+      let resultIndex = questions.result().resultIndex;
+      let shareURL = `${url_obj.href}${resultIndex}.html`;
 
       let fbshare = 'https://www.facebook.com/sharer/sharer.php';
       fbshare += '?u=' + encodeURIComponent(shareURL);
       fbshare += '&quote=' + encodeURIComponent(shareText);
-      fbshare += '&picture=' + encodeURIComponent(imgURL);
       fbshare += '&caption='+ encodeURIComponent(questions.title);
 
       window.open(fbshare, "_blank", "toolbar=0,status=0");
@@ -225,6 +224,7 @@ export function prevSlide(currentSlide) {
     const eventname = 'emotional_forest'
 
     const results = questions.result();
+
     const answerIndex = results.resultIndex;
     $('#result').html(results.resultText);
     $('#resultTop3').html(results.resultTopList);
@@ -261,7 +261,7 @@ export function prevSlide(currentSlide) {
         //3
         $.get(urlRecall + eventname + '/' + answerkey +'/').then(function(response){
           console.log('Get same answer');
-          $('.samePeople span').html(response.values.length);
+          $('.samePeople').html('和' + response.values.length + '個人相同');
         }, function(response){
           console.log('Error:');
           //console.log(response);

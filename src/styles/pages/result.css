@@ -53,13 +53,20 @@
         display: inline-block;
         vertical-align: top;
         li{
+          position: relative;
           padding-left: 1em;;
         }
         li::before{
-          content: "⊙";
-          color: #ffd014;
+          content: "";
+          background-color: #ffd014;
           font-size: 1em;
-          margin-right: 0.5em;
+          margin-right: .5em;
+          border-radius: 50%;
+          height: 0.5em;
+          width: 0.5em;
+          position: absolute;
+          top: 0.5em;
+          left: -0.1em;
         }
       }
     }

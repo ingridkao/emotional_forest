@@ -50,7 +50,7 @@ const questions = {
       type: 'choice',
       variant: 'multiple',
       showModal: false,
-      progress: 27,
+      progress: 10,
       options: [
         {text: '房間裏還蠻整潔的，每天都要稍微整理一下', score: '0'},
         {text: '房間裏亂亂的，還是沒有動力收拾', score: '1,0,0,0,0,1,0,1'},
@@ -68,7 +68,7 @@ const questions = {
       type: 'choice',
       variant: 'multiple',
       showModal: false,
-      progress: 36,
+      progress: 20,
       options: [
         {text: '還蠻感恩這時候有這樣一個地方', score: '0'},
         {text: '和別人共住一個房子，好像需要學習24小時共處的平衡，好難啊', score: '0,0,1,0,0,0,0,0'},
@@ -88,7 +88,7 @@ const questions = {
       type: 'choice',
       variant: 'multiple',
       showModal: false,
-      progress: 45,
+      progress: 30,
       options: [
         {text: '都在工作和學習', score: '0,0,0,0,0,1,0,0'},
         {text: '其實是無所事事，整個世界都糟透了，做什麼好像也都沒用',   score: '1,0,0,0,0,0,0,0'},
@@ -107,7 +107,7 @@ const questions = {
       type: 'choice',
       variant: 'multiple',
       showModal: false,
-      progress: 54,
+      progress: 40,
       options: [
         {text: '就住在一起，雖然有些小磨擦，但還是蠻慰藉的', score: '0'},
         {text: '已經很久沒見了，雖然可以靠網絡鏈接，但有時候真的感覺很孤單', score: '0,1,0,0,0,0,1,0'},
@@ -126,7 +126,7 @@ const questions = {
       type: 'choice',
       variant: 'multiple',
       showModal: false,
-      progress: 63,
+      progress: 50,
       options: [
         {text: '當然是自測體溫看看有沒有被感染啦', score: '0,0,0,1,0,0,0,1'},
         {text: '口罩、廁紙什麼的漲價、斷貨',      score: '0,0,0,1,0,0,0,1'},
@@ -147,7 +147,7 @@ const questions = {
       type: 'choice',
       variant: 'multiple',
       showModal: false,
-      progress: 72,
+      progress: 60,
       options: [
         {text: '完成了計畫好的事情', score: '0'},
         {text: '和同事、朋友、家人甚至陌生人深度溝通', score: '0'},
@@ -157,8 +157,6 @@ const questions = {
         {text: '看到別人也很頹廢的一天',                 score: '1,1,0,0,0,0,0,1'},
       ]
     },
-
-
     {
       question: '8 最近漸漸可以外出',
       image: false,
@@ -166,7 +164,7 @@ const questions = {
       type: 'choice',
       variant: 'multiple',
       showModal: false,
-      progress: 81,
+      progress: 70,
       options: [
         {text: '至少每天出去一次，呼吸新鮮空氣，走一走', score: '0'},
         {text: '慢慢習慣蝸居的方式，反而不想出去見人了',    score: '1,1,0,0,0,1,1,0'},
@@ -185,7 +183,7 @@ const questions = {
       type: 'choice',
       variant: 'multiple',
       showModal: false,
-      progress: 9,
+      progress: 80,
       options: [
         {text: '新聞而已，想看就看，不用花費那麼多心思反思這個吧', score: '0'},
         {text: '發現疫情在好幾個國家又惡化了，非常擔心自己或親友不小心會中招......',   score: '0,0,0,1,0,0,1,0'},
@@ -204,7 +202,7 @@ const questions = {
       type: 'choice',
       variant: 'multiple',
       showModal: false,
-      progress: 18,
+      progress: 90,
       options: [
         {text: '並沒有人聯絡你......',                                     score: '0,1,0,0,0,0,1,0'},
         {text: '親友都有給你發訊息，但你已經失去和外界溝通的動力......',         score: '1,1,1,0,0,0,0,0'},
@@ -223,7 +221,7 @@ const questions = {
       type: 'choice',
       variant: 'multiple',
       showModal: false,
-      progress: 90,
+      progress: 100,
       options: [
         {text: '文化差異導致的誤解、歧視、溝通障礙',                score: '0,1,0,0,0,0,1,0'},
         {text: '人類在疾病前的脆弱和無力',                        score: '1,0,0,1,1,0,1,1'},
@@ -260,7 +258,7 @@ const questions = {
     let despair = false;
     const emotionSum = _.sum(emotions);
     console.log('emotionSum:' + emotionSum);
-    if(hopeful > 9 && emotionSum < 15){
+    if(emotionSum < 15 && hopeful > 9){
       // No negative emotions
       resultIndex = 0;
 
@@ -381,17 +379,21 @@ const questions = {
     `;
 
     let resultTopList = '';
-
-    if(resultIndex != 0){
+    if(resultIndex > 0){
+      let resIndex = resultIndex;
       let scoreList = '';
       let despairText = '';
+      let mean = _.floor(_.mean(emotions));
+      
       for (let i = 0; i < emotions.length; i++) {
-        if(emotions[i] > 0 && i != (resultIndex -1)){
-          scoreList += `<li>${scoreTitle[i+1]} : ${(emotions[i]/emotionSum*100).toFixed(1)}%</li>`;
+        if(i != (resIndex - 1)){
+          if(emotions[i] > mean){
+            scoreList += `<li>${scoreTitle[i+1]} : ${(emotions[i]/emotionSum*100).toFixed(1)}%</li>`;
+          }
         }
       }
 
-      if(rdespair){
+      if(despair){
         despairText = '(多種情緒的總和)';
       }
       if(scoreList != ''){
