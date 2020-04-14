@@ -7,7 +7,7 @@ const questions = {
   subtitle: `測測你是哪隻受傷的小動物`,
   intro: `
 <p>Hey， 你，被來去無蹤的傳染病毒困在家裏的你，最近還好嗎？</p>
-<p>能做的太少，時間卻空出很多；需要擁抱，卻不得不社交隔離。這大概是最容易被壞情緒偷襲的時刻。焦慮、抑鬱甚至絕望，我們被困在一片迷霧遍佈的情緒森林。就讓作為病友的我們為你把脈，看看你是哪隻受傷的小動物，然後，和你分享編輯記者們親測有效的小小貼士。</p>`,
+<p>能做的太少，時間卻空出很多；需要擁抱，卻不得不社交隔離。這大概是最容易被壞情緒偷襲的時刻。焦慮、抑鬱甚至絕望，我們被困在一片迷霧遍佈的情緒森林。就讓作為病友的我們為你把脈，看看你是哪隻受傷的小動物，然後，和你分享編輯記者們親測有效的小小貼士，所有題目均可選取多個答案。</p>`,
   privacy: '<p>本測試搜集的所有資料僅用於研究統計及日後新聞報導用途，我們尊重您的個人隱私，絕不向任何機構或個人披露遊戲參與者的個人資料，但對數據，我們保留研究、歸納、出版的用途。</p>',
   styles: {
     'Dark Color': '#004e8b', // 進度條完成部分的顏色、被選中選項的顏色
@@ -25,7 +25,7 @@ const questions = {
   issues: [
     {
       question: ' 1 今天又是全球被冠狀病毒疫情籠罩下的一天，而你的一天',
-      comment: '（本測試所有題目均可選取多個答案）',
+      comment: '（所有題目均可選取多個答案）',
       image: false,
       scoreTag: 'familiarity',
       type: 'choice',
@@ -46,7 +46,7 @@ const questions = {
 
     {
       question: '2 這是你這段時間長居的房子',
-      comment: '本測試所有題目均可選取多個答案',
+      comment: '可選取多個答案',
       image: false,
       scoreTag: 'familiarity',
       type: 'choice',
@@ -65,7 +65,7 @@ const questions = {
     },
     {
       question: '3 說到這間近乎24小時罩著你的房子',
-      comment: '本測試所有題目均可選取多個答案',
+      comment: '可選取多個答案',
       image: false,
       scoreTag: 'familiarity',
       type: 'choice',
@@ -86,7 +86,7 @@ const questions = {
     },
     {
       question: '4 每天大部分的時間',
-      comment: '本測試所有題目均可選取多個答案',
+      comment: '可選取多個答案',
       image: false,
       scoreTag: 'familiarity',
       type: 'choice',
@@ -106,7 +106,7 @@ const questions = {
     },
     {
       question: '5 生活中最親近的人',
-      comment: '本測試所有題目均可選取多個答案',
+      comment: '可選取多個答案',
       image: false,
       scoreTag: 'familiarity',
       type: 'choice',
@@ -126,7 +126,7 @@ const questions = {
     },
     {
       question: '6 今天最擔心的事情',
-      comment: '本測試所有題目均可選取多個答案',
+      comment: '可選取多個答案',
       image: false,
       scoreTag: 'familiarity',
       type: 'choice',
@@ -148,7 +148,7 @@ const questions = {
     },
     {
       question: '7 每天最開心的事情',
-      comment: '本測試所有題目均可選取多個答案',
+      comment: '可選取多個答案',
       image: false,
       scoreTag: 'familiarity',
       type: 'choice',
@@ -166,7 +166,7 @@ const questions = {
     },
     {
       question: '8 最近漸漸可以外出',
-      comment: '本測試所有題目均可選取多個答案',
+      comment: '可選取多個答案',
       image: false,
       scoreTag: 'familiarity',
       type: 'choice',
@@ -186,7 +186,7 @@ const questions = {
     },
     {
       question: '9 劃開手機，訂閱的媒體 app 顯示有推送，你......',
-      comment: '本測試所有題目均可選取多個答案',
+      comment: '可選取多個答案',
       image: false,
       scoreTag: 'familiarity',
       type: 'choice',
@@ -206,7 +206,7 @@ const questions = {
     },
     {
       question: '10 當然更多的 app 還是社交軟件了，你......',
-      comment: '本測試所有題目均可選取多個答案',
+      comment: '可選取多個答案',
       image: false,
       scoreTag: 'familiarity',
       type: 'choice',
@@ -226,7 +226,7 @@ const questions = {
     },
     {
       question: '11 最近最難以釋懷的事情',
-      comment: '本測試所有題目均可選取多個答案',
+      comment: '可選取多個答案',
       image: false,
       scoreTag: 'familiarity',
       type: 'choice',
