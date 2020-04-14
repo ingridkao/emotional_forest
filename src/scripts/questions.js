@@ -253,17 +253,17 @@ const questions = {
         }
       }
     })
-    console.log('emotions:' + emotions);
 
     let resultIndex;
     let despair = false;
     const emotionSum = _.sum(emotions);
-    console.log('emotionSum:' + emotionSum);
-    if(emotionSum < 15 && hopeful > 9){
+    console.log('emotions:' + emotions + '| emotionSum:' + emotionSum);
+    console.log('hopeful:' + hopeful);
+    if(hopeful > 9 && emotionSum < 15){
       // No negative emotions
       resultIndex = 0;
 
-    }else if(hopeful < 10 && emotionSum > 80){
+    }else if(hopeful < 5 && emotionSum > 80){
       //High emotional score : hopelessness
       resultIndex = 9;
       despair = true;
