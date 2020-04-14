@@ -257,27 +257,41 @@ const questions = {
     let resultIndex;
     let despair = false;
     const emotionSum = _.sum(emotions);
-    console.log('emotions:' + emotions + '| emotionSum:' + emotionSum);
+
     console.log('hopeful:' + hopeful);
-    if(hopeful > 9 && emotionSum < 10){
-      // strict : no negative emotions
+    if(hopeful > 12){
+      // strict : no negative emotions | total count:15
       resultIndex = 0;
-
-    }else if(hopeful < 5 && emotionSum > 80){
-      //High emotional score : hopelessness
-      resultIndex = 9;
-      despair = true;
-
     }else{
-      const emotionMax = _.max(emotions);
-      const findDuplicates = arr => arr.filter((item, index) => arr.indexOf(item) != index);
-      const dup = findDuplicates(emotions);
-      let random = 0;
-      if(dup.length > 0){
-        random = _.sample(dup);
+      if(emotionSum > 120){
+        //High emotional score : hopelessness
+        resultIndex = 9;
+        despair = true;
+        //console.log('despair:' + despair);
+      }else{
+        const emotionMax = _.max(emotions);
+        console.log('emotionMax:' + emotionMax);
+        const dup = _.filter(emotions, (o) => {
+          if(o == emotionMax){
+            return o;
+          }
+        })
+        console.log('dup count:'+dup.length);
+        let random = 0;
+        if(dup.length > 1){
+          let randomArray = [];
+          for (let i = 0; i < dup.length; i++) {
+            randomArray.push(i);
+          }
+          console.log(randomArray);
+          random = _.sample(randomArray);
+        }
+        console.log('random:'+random);
+        resultIndex = _.indexOf(emotions, emotionMax, random) + 1;
       }
-      resultIndex = _.indexOf(emotions, emotionMax, random) + 1;
-    }
+    } 
+
+    console.log('emotions:' + emotions + '| emotionSum:' + emotionSum);
     console.log('resultIndex:' + resultIndex);
 
     const scoreTitle = ['比卡端','頹廢樹熊','孤獨企鵝','暴躁蜂','恐懼兔','操勞驢媽媽','怕肥橘貓','悲哀狗狗','焦慮小豬', '絕望鯨魚'];
@@ -372,7 +386,7 @@ const questions = {
 
     const resultText = `
       <div class="resultImg">
-        <img src="images/result/${resultIndex}.png" alt="${scoreTitle[resultIndex]}">
+        <img src="images/result_v2/${resultIndex}.png" alt="${scoreTitle[resultIndex]}">
       </div>
       <div id="answer" class="resultDesc">
         ${scoreDesc}

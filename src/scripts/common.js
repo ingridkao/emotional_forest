@@ -59,12 +59,12 @@ export function buttonsInit() {
     if (platform === 'facebook') {
       let resultIndex = questions.result().resultIndex;
       let shareURL = `${url_obj.href}${resultIndex}.html`;
+      console.log(shareURL);
 
       let fbshare = 'https://www.facebook.com/sharer/sharer.php';
       fbshare += '?u=' + encodeURIComponent(shareURL);
       fbshare += '&quote=' + encodeURIComponent(shareText);
       fbshare += '&caption='+ encodeURIComponent(questions.title);
-
       window.open(fbshare, "_blank", "toolbar=0,status=0");
 
     } else if (platform === 'twitter') {
