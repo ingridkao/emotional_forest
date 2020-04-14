@@ -46,6 +46,7 @@ const questions = {
 
     {
       question: '2 這是你這段時間長居的房子',
+      comment: '本測試所有題目均可選取多個答案',
       image: false,
       scoreTag: 'familiarity',
       type: 'choice',
@@ -64,6 +65,7 @@ const questions = {
     },
     {
       question: '3 說到這間近乎24小時罩著你的房子',
+      comment: '本測試所有題目均可選取多個答案',
       image: false,
       scoreTag: 'familiarity',
       type: 'choice',
@@ -84,6 +86,7 @@ const questions = {
     },
     {
       question: '4 每天大部分的時間',
+      comment: '本測試所有題目均可選取多個答案',
       image: false,
       scoreTag: 'familiarity',
       type: 'choice',
@@ -103,6 +106,7 @@ const questions = {
     },
     {
       question: '5 生活中最親近的人',
+      comment: '本測試所有題目均可選取多個答案',
       image: false,
       scoreTag: 'familiarity',
       type: 'choice',
@@ -122,6 +126,7 @@ const questions = {
     },
     {
       question: '6 今天最擔心的事情',
+      comment: '本測試所有題目均可選取多個答案',
       image: false,
       scoreTag: 'familiarity',
       type: 'choice',
@@ -143,6 +148,7 @@ const questions = {
     },
     {
       question: '7 每天最開心的事情',
+      comment: '本測試所有題目均可選取多個答案',
       image: false,
       scoreTag: 'familiarity',
       type: 'choice',
@@ -160,6 +166,7 @@ const questions = {
     },
     {
       question: '8 最近漸漸可以外出',
+      comment: '本測試所有題目均可選取多個答案',
       image: false,
       scoreTag: 'familiarity',
       type: 'choice',
@@ -179,6 +186,7 @@ const questions = {
     },
     {
       question: '9 劃開手機，訂閱的媒體 app 顯示有推送，你......',
+      comment: '本測試所有題目均可選取多個答案',
       image: false,
       scoreTag: 'familiarity',
       type: 'choice',
@@ -198,6 +206,7 @@ const questions = {
     },
     {
       question: '10 當然更多的 app 還是社交軟件了，你......',
+      comment: '本測試所有題目均可選取多個答案',
       image: false,
       scoreTag: 'familiarity',
       type: 'choice',
@@ -217,6 +226,7 @@ const questions = {
     },
     {
       question: '11 最近最難以釋懷的事情',
+      comment: '本測試所有題目均可選取多個答案',
       image: false,
       scoreTag: 'familiarity',
       type: 'choice',
@@ -238,13 +248,9 @@ const questions = {
     // 計算答案
     //'頹廢樹熊','孤獨企鵝','暴躁蜂','恐懼兔','操勞驢媽媽','怕肥橘貓','悲哀狗狗','焦慮小豬'
     const emotions = [0,0,0,0,0,0,0,0];
-    let hopeful = 0;
     $('.option input:checked').each(function () {
       let score = $(this).data('score');
-      if(score == 0){
-        //total hopeful
-        hopeful += 1;
-      }else{
+      if(score != 0){
         let scoreArray = score.split(',');
         for (let index = 0; index < scoreArray.length; index++) {
           if(scoreArray[index] > 0){
@@ -255,19 +261,15 @@ const questions = {
     })
 
     let resultIndex;
-    let despair = false;
     const emotionSum = _.sum(emotions);
 
-    console.log('hopeful:' + hopeful);
-    if(hopeful > 12){
-      // strict : no negative emotions | total count:15
+    if(emotionSum < 17){
+      // no negative emotions >=16
       resultIndex = 0;
     }else{
-      if(emotionSum > 120){
-        //High emotional score : hopelessness
+      if(emotionSum > 85){
+        //High emotional score : hopelessness >= 86
         resultIndex = 9;
-        despair = true;
-        //console.log('despair:' + despair);
       }else{
         const emotionMax = _.max(emotions);
         console.log('emotionMax:' + emotionMax);
@@ -301,7 +303,8 @@ const questions = {
     switch (resultIndex) {
       case 0:
         shareText = '我是一隻比卡端，奔跑著，積聚閃電，照亮黑暗！';
-        scoreDesc = `<p>我也是比卡端，今天我不關心人類，我只關心你。</p>
+        scoreDesc = `<p>(天啊！你解鎖了稀有情緒動物！）</p>
+                    <p>我也是比卡端，今天我不關心人類，我只關心你。</p>
                     <p>在災難中，純粹的樂觀是個偽命題。人總是站在如此絕境，一代又一代。卡繆說，唯一嚴肅的哲學問題就是自殺。我們往往處在這樣的黑暗中，思考為甚麼不自殺。在私人層面上，處理負面情緒的第一步就是承認接受它；在公共層面上，突破問題的起點是理解甚至擁抱它們的結構性根源。</p>
                     <p>然而「人」的存在並不完全被「結構」所限。人是能改變的，如水波中跳躍的陽光，帶來流水線與機器之外的「錯位」之美，也會帶來閃爍的「希望」——拋棄結構加諸自身的枷鎖，重新發現與他人、世界的關係。</p>
                     <p>除了對外批判，也可以向內追尋；除了迎接自己，也可以接住他人。與世隔絕中，最動搖人心的是信任與安全的稀缺，這既來自於穩定的自我，也來自於集體行動與公共團結。在社會正義與生活正義雙贏的路上，比卡端在奔跑，跑出想要的人生和世界的樣子。</p>
@@ -375,7 +378,8 @@ const questions = {
         break;
       case 9:
         shareText = '我是一隻絕望鯨，期待發現閃光的線，順著它找到想做的事情';
-        scoreDesc = `<p>「樂觀的人只是信息不靈通的人。」韋爾貝在短篇集《大樹》中寫。淺薄如我，也會對盲目相信「明天會更好」的人敬而遠之。樂觀很可能源於懶惰。而絕望，大抵是人勤奮好學地掌握了盡可能多的信息後，體會到的第一層感受。作為新聞從業者，我每一天都浸泡在這種絕望裏，要花費力氣消化那些令人悲憤的信息。</p>
+        scoreDesc = `<p>(天啊！你解鎖了稀有情緒動物！）</p>
+                    <p>「樂觀的人只是信息不靈通的人。」韋爾貝在短篇集《大樹》中寫。淺薄如我，也會對盲目相信「明天會更好」的人敬而遠之。樂觀很可能源於懶惰。而絕望，大抵是人勤奮好學地掌握了盡可能多的信息後，體會到的第一層感受。作為新聞從業者，我每一天都浸泡在這種絕望裏，要花費力氣消化那些令人悲憤的信息。</p>
                     <p>但我願意把這種感受視作一個人決定生活在真實世界的代價，以及，一個新的開端——世界可真是糟透了，我們可以做點什麼呢？人類社會做出的一切努力，從女團選秀到探索外星生命，無論是有意無意都是在抵抗這種絕望。</p>
                     <p>接受、消化這種絕望，並帶著它負重前行，漫長且辛苦。不如多給自己點時間，偶爾耍廢沒什麼大不了，和朋友分享絕望心得，閱讀、思考、運動，堅持這樣做，期待有天你會在絕望裏發現一條閃光的線，順著它走，找到想做的事情——那便是你抵抗絕望的最佳手段。在此之前，hang in there.</p>
                     <p class="autor">端傳媒中國組 Susie</p>`;
@@ -397,7 +401,6 @@ const questions = {
     if(resultIndex > 0){
       let resIndex = resultIndex;
       let scoreList = '';
-      let despairText = '';
       let mean = _.floor(_.mean(emotions));
       
       for (let i = 0; i < emotions.length; i++) {
@@ -408,12 +411,9 @@ const questions = {
         }
       }
 
-      if(despair){
-        despairText = '(多種情緒的總和)';
-      }
       if(scoreList != ''){
         resultTopList = `
-          <p>其他隱含的小動物們${despairText}：</p>
+          <p>你體內隱藏的其他情緒動物：</p>
           <ul>
             ${scoreList}
           </ul>

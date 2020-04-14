@@ -8,6 +8,7 @@
     <meta property="og:type" content="article" />
     <meta property="og:title" content="情緒の森" />
     <meta property="og:description" content="測測你是哪隻受傷的小動物" />
+    <meta property="og:quote" content="情緒の森:測測你是哪隻受傷的小動物" />
     <meta property="og:url" content="https://theinitium.com/project/20200411-quiz-emotionforest" />
     <meta property="og:image" content="https://theinitium.com/project/20200411-quiz-emotionforest/images/sharepic-01.jpg" />
 
@@ -153,11 +154,11 @@
                 ></dropdown-options>
               </ul>
 
-              <div>
-                <p v-if="issue_index == 0" style="float: left;">{{ issue.comment }}</p>
+              <div style="display: flex;flex-direction: row;justify-content: space-between;align-items:center;">
                 <button v-if="issue_index !== 0" class="nav-btn issue-btn issue-btn--left js-show-prev" type="button">
                   上一題
                 </button>
+                <p v-if="issue.comment" style="font-size: 0.9em;">{{ issue.comment }}</p>
                 <button v-show="!issue.showModal" class="nav-btn issue-btn issue-btn--right" v-bind:class="[is_last_issue(issue_index) ? 'js-show-result' : 'js-show-next']" type="button">
                   {{ is_last_issue(issue_index) ? '結束答題' : '下一題' }}
                 </button>

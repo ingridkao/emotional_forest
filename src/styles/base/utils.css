@@ -18,9 +18,9 @@
 
   @media(--mobile-portrait) {
     width: 95%;
-    height: 60vh;
+    height: 70vh;
     padding: 0 1em;
-    margin: 20vh auto;
+    margin: 5em auto auto;
   }
   @media(--tablet) {
     width: 80%;

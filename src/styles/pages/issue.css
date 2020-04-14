@@ -4,12 +4,12 @@
 
 .issue {
   &-btn {
-    &--left {
+    /*&--left {
       float: left;
     }
     &--right {
       float: right;
-    }
+    }*/
   }
   $.content{
     height: 70vh;
