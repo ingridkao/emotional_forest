@@ -259,8 +259,8 @@ const questions = {
     const emotionSum = _.sum(emotions);
     console.log('emotions:' + emotions + '| emotionSum:' + emotionSum);
     console.log('hopeful:' + hopeful);
-    if(hopeful > 9 && emotionSum < 15){
-      // No negative emotions
+    if(hopeful > 9 && emotionSum < 10){
+      // strict : no negative emotions
       resultIndex = 0;
 
     }else if(hopeful < 5 && emotionSum > 80){
